@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>cocos2d-x的头发仿真 | Hexo</title>
+  <title>cocos2d-x的头发仿真 | losttoken</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="由于是2D实现飞翔时头发飘逸的效果，问题得到了一定简化 , 头发与头发之间，头发与外物之间的关系均可以忽略，仅仅需要考虑风向和发根点的影响即可。
 那么，头发就可以看成是一个个的点连起来的线 ， 后面的点的运动依赖于前一个点的运动, 每一个点都只和自己前面那个点有关系。笔者之前的那篇metaball的cocos2d-x实现：shader实现元球文章里 ， 有用到万有引力，为了简化问题只使用了万有引力">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cocos2d-x的头发仿真">
-<meta property="og:url" content="http://yoursite.com/2014/09/27/cocos2d-x的头发仿真/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://losttoken.github.io/2014/09/27/cocos2d-x的头发仿真/index.html">
+<meta property="og:site_name" content="losttoken">
 <meta property="og:description" content="由于是2D实现飞翔时头发飘逸的效果，问题得到了一定简化 , 头发与头发之间，头发与外物之间的关系均可以忽略，仅仅需要考虑风向和发根点的影响即可。
 那么，头发就可以看成是一个个的点连起来的线 ， 后面的点的运动依赖于前一个点的运动, 每一个点都只和自己前面那个点有关系。笔者之前的那篇metaball的cocos2d-x实现：shader实现元球文章里 ， 有用到万有引力，为了简化问题只使用了万有引力">
 <meta property="og:updated_time" content="2016-04-23T14:19:33.000Z">
@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="由于是2D实现飞翔时头发飘逸的效果，问题得到了一定简化 , 头发与头发之间，头发与外物之间的关系均可以忽略，仅仅需要考虑风向和发根点的影响即可。
 那么，头发就可以看成是一个个的点连起来的线 ， 后面的点的运动依赖于前一个点的运动, 每一个点都只和自己前面那个点有关系。笔者之前的那篇metaball的cocos2d-x实现：shader实现元球文章里 ， 有用到万有引力，为了简化问题只使用了万有引力">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="losttoken" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -40,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">losttoken</a>
       </h1>
       
     </div>
@@ -57,10 +57,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://losttoken.github.io"></form>
       </div>
     </div>
   </div>
@@ -99,7 +99,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/09/27/cocos2d-x的头发仿真/" data-id="cind732390002gv958e83j4k4" class="article-share-link">Share</a>
+      <a data-url="http://losttoken.github.io/2014/09/27/cocos2d-x的头发仿真/" data-id="cind732390002gv958e83j4k4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -142,7 +142,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
     </div>
@@ -152,7 +152,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -188,7 +188,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 John Doe<br>
+      &copy; 2016 Sun Peng<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

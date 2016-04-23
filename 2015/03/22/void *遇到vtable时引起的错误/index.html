@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>void *遇到vtable时引起的错误 | Hexo</title>
+  <title>void *遇到vtable时引起的错误 | losttoken</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="有一个虚基类，名字叫BattleBase，下面继承了很多BattleA，BattleB，BattleC……，由于某种需求，需要把当前的BattleA，BattleB，BattleC等实例指针传递给PluginHelper单例来实现C++与Objective-C的交互，做法是把当前this指针直接赋值给PluginHelper里的个void *变量，使用时在转换为BattleBase*，来规避coc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="void *遇到vtable时引起的错误">
-<meta property="og:url" content="http://yoursite.com/2015/03/22/void *遇到vtable时引起的错误/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://losttoken.github.io/2015/03/22/void *遇到vtable时引起的错误/index.html">
+<meta property="og:site_name" content="losttoken">
 <meta property="og:description" content="有一个虚基类，名字叫BattleBase，下面继承了很多BattleA，BattleB，BattleC……，由于某种需求，需要把当前的BattleA，BattleB，BattleC等实例指针传递给PluginHelper单例来实现C++与Objective-C的交互，做法是把当前this指针直接赋值给PluginHelper里的个void *变量，使用时在转换为BattleBase*，来规避coc">
 <meta property="og:updated_time" content="2016-04-23T14:05:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="void *遇到vtable时引起的错误">
 <meta name="twitter:description" content="有一个虚基类，名字叫BattleBase，下面继承了很多BattleA，BattleB，BattleC……，由于某种需求，需要把当前的BattleA，BattleB，BattleC等实例指针传递给PluginHelper单例来实现C++与Objective-C的交互，做法是把当前this指针直接赋值给PluginHelper里的个void *变量，使用时在转换为BattleBase*，来规避coc">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="losttoken" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -37,7 +37,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">losttoken</a>
       </h1>
       
     </div>
@@ -54,10 +54,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://losttoken.github.io"></form>
       </div>
     </div>
   </div>
@@ -137,7 +137,7 @@ virtual ~B();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/03/22/void *遇到vtable时引起的错误/" data-id="cind7323u000bgv95ujsicj0f" class="article-share-link">Share</a>
+      <a data-url="http://losttoken.github.io/2015/03/22/void *遇到vtable时引起的错误/" data-id="cind7323u000bgv95ujsicj0f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -180,7 +180,7 @@ virtual ~B();
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
     </div>
@@ -190,7 +190,7 @@ virtual ~B();
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -226,7 +226,7 @@ virtual ~B();
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 John Doe<br>
+      &copy; 2016 Sun Peng<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
