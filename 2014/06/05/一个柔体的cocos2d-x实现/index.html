@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="参考贝塞尔曲线公式：推导出八阶贝兹曲线的公式，结合CCDrawingPrimitives.cpp中的drawQuadBezier和drawSolidCircle ，注意opengl的glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) segments+1)，中GL_TRIANGLE_FAN决定了以三角扇的方式填充各个顶点，来弄成一个实心的闭合图形，GL_LINE_">
 <meta property="og:image" content="http://upload.wikimedia.org/math/8/f/4/8f4c915ef475b93fc0f8374f378e436f.png">
-<meta property="og:updated_time" content="2016-04-23T14:06:02.000Z">
+<meta property="og:updated_time" content="2016-04-23T14:13:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个柔体的cocos2d-x实现">
 <meta name="twitter:description" content="参考贝塞尔曲线公式：推导出八阶贝兹曲线的公式，结合CCDrawingPrimitives.cpp中的drawQuadBezier和drawSolidCircle ，注意opengl的glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) segments+1)，中GL_TRIANGLE_FAN决定了以三角扇的方式填充各个顶点，来弄成一个实心的闭合图形，GL_LINE_">
@@ -54,9 +54,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -87,9 +87,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>参考贝塞尔曲线公式：<br><img src="http://upload.wikimedia.org/math/8/f/4/8f4c915ef475b93fc0f8374f378e436f.png" alt="贝兹曲线"><br>推导出八阶贝兹曲线的公式，结合CCDrawingPrimitives.cpp中的drawQuadBezier和drawSolidCircle ，<br>注意opengl的glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) segments+1)，中GL_TRIANGLE_FAN决定了以三角扇的方式填充各个顶点，来弄成一个实心的闭合图形，GL_LINE_STRIP的话就是画线啦。</p>
-<p>粗略地实现:<br>    <a id="more"></a><br>    void drawOctupleSolidBezier(const Point&amp; origin, const Point&amp; control1, const Point&amp; control2,const Point&amp; control3,const Point&amp; control4,const Point&amp; control5,const Point&amp; control6, const Point&amp; destination, unsigned int segments,std::set <em>edge)<br>    {<br>        Point control7=Point(2</em>origin.x-control1.x,2<em>origin.y-control1.y);<br>        lazy_init();<br>        Vertex2F</em> vertices = new Vertex2F[segments + 1];<br>        float t = 0;<br>        for(unsigned int i = 0; i &lt; segments; i++)<br>        {<br>            vertices[i].x =<br>            powf(1 - t, 8) * origin.x</p>
-<pre><code>        + 8.0f *powf(1 - t, 7) * t * control1.x
+        <p>参考贝塞尔曲线公式：<br><img src="http://upload.wikimedia.org/math/8/f/4/8f4c915ef475b93fc0f8374f378e436f.png" alt="贝兹曲线"><br>推导出八阶贝兹曲线的公式，结合CCDrawingPrimitives.cpp中的drawQuadBezier和drawSolidCircle ，<br>注意opengl的glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) segments+1)，中GL_TRIANGLE_FAN决定了以三角扇的方式填充各个顶点，来弄成一个实心的闭合图形，GL_LINE_STRIP的话就是画线啦。<br><a id="more"></a><br>粗略地实现:   </p>
+<pre><code>void drawOctupleSolidBezier(const Point&amp; origin, const Point&amp; control1, const Point&amp; control2,const Point&amp; control3,const Point&amp; control4,const Point&amp; control5,const Point&amp; control6, const Point&amp; destination, unsigned int segments,std::set *edge)
+{
+    Point control7=Point(2*origin.x-control1.x,2*origin.y-control1.y);
+    lazy_init();
+    Vertex2F* vertices = new Vertex2F[segments + 1];
+    float t = 0;
+    for(unsigned int i = 0; i &lt; segments; i++)
+    {
+        vertices[i].x =
+        powf(1 - t, 8) * origin.x
+        + 8.0f *powf(1 - t, 7) * t * control1.x
         +28.0f * powf(1 - t, 6) * t * t * control2.x
         +56.0f * powf(1 - t, 5) * t * t *t * control3.x
         +70.0f * powf(1 - t, 4) * t * t * t *t *control4.x
@@ -166,7 +175,7 @@ static void calcEdges(const int i,set *edge,const Vertex2F *vertices){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/06/05/一个柔体的cocos2d-x实现/" data-id="cind7323w000cgv95j0jrid0h" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2014/06/05/一个柔体的cocos2d-x实现/" data-id="cind7323w000cgv95j0jrid0h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -176,7 +185,7 @@ static void calcEdges(const int i,set *edge,const Vertex2F *vertices){
 <nav id="article-nav">
   
     <a href="/2014/07/02/一个第三方认证服务的备份/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           一个第三方认证服务的备份
@@ -186,7 +195,7 @@ static void calcEdges(const int i,set *edge,const Vertex2F *vertices){
   
   
     <a href="/2014/02/14/lua借助upstream连接至memcache/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">lua借助upstream连接至memcache</div>
     </a>
   
@@ -219,7 +228,7 @@ static void calcEdges(const int i,set *edge,const Vertex2F *vertices){
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -256,7 +265,7 @@ static void calcEdges(const int i,set *edge,const Vertex2F *vertices){
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
