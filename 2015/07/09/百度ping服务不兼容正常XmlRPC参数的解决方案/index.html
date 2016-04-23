@@ -6,18 +6,18 @@
   <title>百度ping服务不兼容正常XmlRPC参数的解决方案 | losttoken</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="wordpress对谷歌很友好，百度似乎不怎么爱收录wordpress页面，我们有一系列的方法来弥补这一缺陷，方法之一就是使用ping服务，通过xmlrpc的方式在文章发布后主动告知baidu,看到百度的说明：  
-RPC端点： http://ping.baidu.com/ping/RPC2调用方法名： weblogUpdates.extendedPing参数： 博客名称，博客首页地址，新发文章地">
+RPC端点： ping.baidu.com/ping/RPC2调用方法名： weblogUpdates.extendedPing参数： 博客名称，博客首页地址，新发文章地址，博客rss">
 <meta property="og:type" content="article">
 <meta property="og:title" content="百度ping服务不兼容正常XmlRPC参数的解决方案">
 <meta property="og:url" content="http://losttoken.github.io/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/index.html">
 <meta property="og:site_name" content="losttoken">
 <meta property="og:description" content="wordpress对谷歌很友好，百度似乎不怎么爱收录wordpress页面，我们有一系列的方法来弥补这一缺陷，方法之一就是使用ping服务，通过xmlrpc的方式在文章发布后主动告知baidu,看到百度的说明：  
-RPC端点： http://ping.baidu.com/ping/RPC2调用方法名： weblogUpdates.extendedPing参数： 博客名称，博客首页地址，新发文章地">
-<meta property="og:updated_time" content="2016-04-23T14:05:52.000Z">
+RPC端点： ping.baidu.com/ping/RPC2调用方法名： weblogUpdates.extendedPing参数： 博客名称，博客首页地址，新发文章地址，博客rss">
+<meta property="og:updated_time" content="2016-04-23T16:35:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百度ping服务不兼容正常XmlRPC参数的解决方案">
 <meta name="twitter:description" content="wordpress对谷歌很友好，百度似乎不怎么爱收录wordpress页面，我们有一系列的方法来弥补这一缺陷，方法之一就是使用ping服务，通过xmlrpc的方式在文章发布后主动告知baidu,看到百度的说明：  
-RPC端点： http://ping.baidu.com/ping/RPC2调用方法名： weblogUpdates.extendedPing参数： 博客名称，博客首页地址，新发文章地">
+RPC端点： ping.baidu.com/ping/RPC2调用方法名： weblogUpdates.extendedPing参数： 博客名称，博客首页地址，新发文章地址，博客rss">
   
     <link rel="alternate" href="/atom.xml" title="losttoken" type="application/atom+xml">
   
@@ -89,7 +89,7 @@ RPC端点： http://ping.baidu.com/ping/RPC2调用方法名： weblogUpdates.ext
     <div class="article-entry" itemprop="articleBody">
       
         <p>wordpress对谷歌很友好，百度似乎不怎么爱收录wordpress页面，我们有一系列的方法来弥补这一缺陷，方法之一就是使用ping服务，通过xmlrpc的方式在文章发布后主动告知baidu,看到百度的说明：  </p>
-<p>RPC端点： <a href="http://ping.baidu.com/ping/RPC2" target="_blank" rel="external">http://ping.baidu.com/ping/RPC2</a><br>调用方法名： weblogUpdates.extendedPing<br>参数： 博客名称，博客首页地址，新发文章地址，博客rss地址<br><a id="more"></a></p>
+<p>RPC端点： ping.baidu.com/ping/RPC2<br>调用方法名： weblogUpdates.extendedPing<br>参数： 博客名称，博客首页地址，新发文章地址，博客rss地址<br><a id="more"></a></p>
 <p>前两条还好，都是默认值，参数这一部分就不对了，默认其他的搜索引擎或者博客RSS的xmlrpc都是三个参数，百度有四个参数，而且亲自测试后第四个参数还是必须的，否则会返回 1 这个错误码.所以，wp的xmlrpc推送方式：wordpress后台–&gt;设置–&gt;撰写 最下面xmlrpc地址添加方式对百度无效。只好通过add_action的方式来处理百度的xmlrpc。  </p>
 <pre><code>function xmlrpc_baidu($post_id) {
     $baiduXML = ‘weblogUpdates.extendedPing’ . get_option(‘blogname’) . “” . home_url() . “” .get_permalink($post_id) . “”. get_feed_link() . “”;
