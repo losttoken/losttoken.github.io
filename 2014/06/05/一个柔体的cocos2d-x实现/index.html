@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一个柔体的cocos2d-x实现 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="参考贝塞尔曲线公式：推导出八阶贝兹曲线的公式，结合CCDrawingPrimitives.cpp中的drawQuadBezier和drawSolidCircle ，注意opengl的glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) segments+1)，中GL_TRIANGLE_FAN决定了以三角扇的方式填充各个顶点，来弄成一个实心的闭合图形，GL_LINE_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个柔体的cocos2d-x实现">
+<meta property="og:url" content="http://yoursite.com/2014/06/05/一个柔体的cocos2d-x实现/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="参考贝塞尔曲线公式：推导出八阶贝兹曲线的公式，结合CCDrawingPrimitives.cpp中的drawQuadBezier和drawSolidCircle ，注意opengl的glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) segments+1)，中GL_TRIANGLE_FAN决定了以三角扇的方式填充各个顶点，来弄成一个实心的闭合图形，GL_LINE_">
+<meta property="og:image" content="http://upload.wikimedia.org/math/8/f/4/8f4c915ef475b93fc0f8374f378e436f.png">
+<meta property="og:updated_time" content="2016-04-23T14:06:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个柔体的cocos2d-x实现">
+<meta name="twitter:description" content="参考贝塞尔曲线公式：推导出八阶贝兹曲线的公式，结合CCDrawingPrimitives.cpp中的drawQuadBezier和drawSolidCircle ，注意opengl的glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) segments+1)，中GL_TRIANGLE_FAN决定了以三角扇的方式填充各个顶点，来弄成一个实心的闭合图形，GL_LINE_">
+<meta name="twitter:image" content="http://upload.wikimedia.org/math/8/f/4/8f4c915ef475b93fc0f8374f378e436f.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-一个柔体的cocos2d-x实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/06/05/一个柔体的cocos2d-x实现/" class="article-date">
+  <time datetime="2014-06-04T16:00:00.000Z" itemprop="datePublished">2014-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一个柔体的cocos2d-x实现
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考贝塞尔曲线公式：<br><img src="http://upload.wikimedia.org/math/8/f/4/8f4c915ef475b93fc0f8374f378e436f.png" alt="贝兹曲线"><br>推导出八阶贝兹曲线的公式，结合CCDrawingPrimitives.cpp中的drawQuadBezier和drawSolidCircle ，<br>注意opengl的glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) segments+1)，中GL_TRIANGLE_FAN决定了以三角扇的方式填充各个顶点，来弄成一个实心的闭合图形，GL_LINE_STRIP的话就是画线啦。</p>
+<p>粗略地实现:<br>    <a id="more"></a><br>    void drawOctupleSolidBezier(const Point&amp; origin, const Point&amp; control1, const Point&amp; control2,const Point&amp; control3,const Point&amp; control4,const Point&amp; control5,const Point&amp; control6, const Point&amp; destination, unsigned int segments,std::set <em>edge)<br>    {<br>        Point control7=Point(2</em>origin.x-control1.x,2<em>origin.y-control1.y);<br>        lazy_init();<br>        Vertex2F</em> vertices = new Vertex2F[segments + 1];<br>        float t = 0;<br>        for(unsigned int i = 0; i &lt; segments; i++)<br>        {<br>            vertices[i].x =<br>            powf(1 - t, 8) * origin.x</p>
+<pre><code>        + 8.0f *powf(1 - t, 7) * t * control1.x
+        +28.0f * powf(1 - t, 6) * t * t * control2.x
+        +56.0f * powf(1 - t, 5) * t * t *t * control3.x
+        +70.0f * powf(1 - t, 4) * t * t * t *t *control4.x
+        +56.0f * powf(1 - t, 3) * t * t * t *t *t *control5.x
+        +28.0f * powf(1 - t, 2) * t * t * t *t *t *t *control6.x
+        +8.0f * (1 - t) * t * t *t *t *t *t *t * control7.x
+        +t * t * t *t*t * t * t *t *destination.x;
+
+        vertices[i].y =
+        powf(1 - t, 8) * origin.y
+        + 8.0f *powf(1 - t, 7) * t * control1.y
+        +28.0f * powf(1 - t, 6) * t * t * control2.y
+        +56.0f * powf(1 - t, 5) * t * t *t * control3.y
+        +70.0f * powf(1 - t, 4) * t * t * t *t *control4.y
+        +56.0f * powf(1 - t, 3) * t * t * t *t *t *control5.y
+        +28.0f * powf(1 - t, 2) * t * t * t *t *t *t *control6.y
+        +8.0f * (1 - t) * t * t *t *t *t *t *t * control7.y
+        +t * t * t *t*t * t * t *t *destination.y;
+
+        t += 1.0f / segments;
+    }
+    vertices[segments].x = destination.x;
+    vertices[segments].y = destination.y;
+    for(unsigned int i = 0; i &lt; segments; i++)
+    {
+        calcEdges(i,edge,vertices);
+    }
+
+    s_shader-&gt;use();
+    //s_shader-&gt;setUniformForModelViewProjectionMatrix();
+    s_shader-&gt;setUniformsForBuiltins();
+    s_shader-&gt;setUniformLocationWith4fv(s_colorLocation, (GLfloat*) &amp;s_color.r, 1);
+    GL::enableVertexAttribs( GL::VERTEX_ATTRIB_FLAG_POSITION );
+
+    #ifdef EMSCRIPTEN
+        setGLBufferData(vertices, (segments + 1) * sizeof(Vertex2F));
+        glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    #else
+        glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+    #endif // EMSCRIPTEN
+
+    glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) segments + 1);
+    CC_SAFE_DELETE_ARRAY(vertices);
+    CC_INCREMENT_GL_DRAWS(1);
+}
+
+inline float distanceX(Vertex2F &amp;v0,Vertex2F &amp;v1){
+    return (sqrt(1+((v1.x-v0.x)*(v1.x-v0.x))/((v1.y-v0.y)*(v1.y-v0.y))));
+}
+
+inline float distanceY(Vertex2F &amp;v0,Vertex2F &amp;v1){
+    return (sqrt(1+((v1.y-v0.y)*(v1.y-v0.y))/((v1.x-v0.x)*(v1.x-v0.x))));
+}
+
+static void calcEdges(const int i,set *edge,const Vertex2F *vertices){
+    static float xx,yy;
+    static Vertex2F &amp;v0=vertices[i];
+    static Vertex2F &amp;v1=vertices[i+1];
+    xx=20/distanceX(v0,v1)+v0.x;
+    yy=20/distanceY(v0,v1)+v0.y;
+    edge-&gt;insert(int(xx/135)*1000+int(yy/135));
+    xx=-20/distanceX(v0,v1)+v0.x;
+    yy=-20/distanceY(v0,v1)+v0.y;
+    edge-&gt;insert(int(xx/135)*1000+int(yy/135));
+    xx=-20/distanceX(v0,v1)+v0.x;
+    yy=20/distanceY(v0,v1)+v0.y;
+    edge-&gt;insert(int(xx/135)*1000+int(yy/135));
+    xx=20/distanceX(v0,v1)+v0.x;
+    yy=-20/distanceY(v0,v1)+v0.y;
+    edge-&gt;insert(int(xx/135)*1000+int(yy/135));
+}
+</code></pre><p>抛出edges这个结构，来方便边界检测。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/06/05/一个柔体的cocos2d-x实现/" data-id="cind7323w000cgv95j0jrid0h" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/07/02/一个第三方认证服务的备份/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          一个第三方认证服务的备份
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/02/14/lua借助upstream连接至memcache/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">lua借助upstream连接至memcache</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/">ngx.location.capture造成的at least one subrequest should be specified错误</a>
+          </li>
+        
+          <li>
+            <a href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/">百度ping服务不兼容正常XmlRPC参数的解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/19/metaball的cocos2d-x实现：shader实现元球/">metaball的cocos2d-x实现：shader实现元球</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/">lua的UTF-8中文字符的类substring截取</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/22/void *遇到vtable时引起的错误/">void *遇到vtable时引起的错误</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

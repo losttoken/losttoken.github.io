@@ -64,10 +64,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-test2" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-ngx.location.capture造成的at least one subrequest should be specified错误" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/03/23/test2/" class="article-date">
-  <time datetime="2016-03-22T16:18:26.000Z" itemprop="datePublished">2016-03-23</time>
+    <a href="/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/" class="article-date">
+  <time datetime="2015-10-16T16:00:00.000Z" itemprop="datePublished">2015-10-17</time>
 </a>
     
   </div>
@@ -78,7 +78,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/23/test2/">test2</a>
+      <a class="article-title" href="/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/">ngx.location.capture造成的at least one subrequest should be specified错误</a>
     </h1>
   
 
@@ -86,11 +86,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        <p>执行批量ngx.location.capture或者ngx.location.capture_multi时，频繁报出以下错误：  </p>
+<pre><code>2014/07/24 14:32:21 [error] 31703#0: *2634646 lua entry thread aborted: runtime error: sample.lua:16: at least one subrequest should be specified
+</code></pre><p>由于最开始ngx.location.capture使用了循环，所以怀疑是lua循环的时候某个变量出的问题，多次修改后直接使用 ngx.location.capture_multi来测试，问题依然存在. 由于这次是大规模执行子请求，而且这个子请求还是个proxy_pass的子请求，问题有可能出在proxy_pass上<br>翻看文档，发现:<br>
+        
+          <p class="article-more-link">
+            <a href="/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/#more">Read More</a>
+          </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/23/test2/" data-id="cim3mlfw60000gf958qqaoym0" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/" data-id="cind7323n0008gv95o2setads" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -100,10 +107,10 @@
 
 
   
-    <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-百度ping服务不兼容正常XmlRPC参数的解决方案" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/03/23/test/" class="article-date">
-  <time datetime="2016-03-22T16:04:04.000Z" itemprop="datePublished">2016-03-23</time>
+    <a href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/" class="article-date">
+  <time datetime="2015-07-08T16:00:00.000Z" itemprop="datePublished">2015-07-09</time>
 </a>
     
   </div>
@@ -114,7 +121,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/23/test/">test</a>
+      <a class="article-title" href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/">百度ping服务不兼容正常XmlRPC参数的解决方案</a>
     </h1>
   
 
@@ -122,11 +129,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        <p>wordpress对谷歌很友好，百度似乎不怎么爱收录wordpress页面，我们有一系列的方法来弥补这一缺陷，方法之一就是使用ping服务，通过xmlrpc的方式在文章发布后主动告知baidu,看到百度的说明：  </p>
+<p>RPC端点： <a href="http://ping.baidu.com/ping/RPC2">http://ping.baidu.com/ping/RPC2</a><br>调用方法名： weblogUpdates.extendedPing<br>参数： 博客名称，博客首页地址，新发文章地址，博客rss地址<br>
+        
+          <p class="article-more-link">
+            <a href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/#more">Read More</a>
+          </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/23/test/" data-id="cim3mlfwo0001gf95c3w9aos5" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/" data-id="cind73241000fgv95xd0hdpr4" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -136,10 +149,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-metaball的cocos2d-x实现：shader实现元球" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/03/22/hello-world/" class="article-date">
-  <time datetime="2016-03-22T15:34:18.000Z" itemprop="datePublished">2016-03-22</time>
+    <a href="/2015/06/19/metaball的cocos2d-x实现：shader实现元球/" class="article-date">
+  <time datetime="2015-06-18T16:00:00.000Z" itemprop="datePublished">2015-06-19</time>
 </a>
     
   </div>
@@ -150,7 +163,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/22/hello-world/">Hello World</a>
+      <a class="article-title" href="/2015/06/19/metaball的cocos2d-x实现：shader实现元球/">metaball的cocos2d-x实现：shader实现元球</a>
     </h1>
   
 
@@ -158,20 +171,357 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>metaball实现一个细胞融合分裂的效果,这类球在图形学上有个名字，叫做metaball , 元球。<br><img src="http://codezhai-static.qiniudn.com/wp-content/uploads/2014/05/metaball.png" alt="metaball"><br>metaball是这样一个东西，两个球离得很远时，互不影响，当离得比较近时，就会互相吸引，同时，这两个球的半径越大，吸引的程度也就越大，可以认为是忽略掉质量、密度等因素的万有引力，把万有引力公式里的距离和半径之外的参数全设成1，就是metaball了，两个一模一样的球放在那里，之间的引力关系，把引力等于某个值的点全部连起来，就成了一个类似于葫芦的形状，这就是metaball了。<br>所以，我们给出简化过后的metaball力场公式：f=R/L，和半径R成正比，和距离L成反比。当然这个R和L很可能是2次方或者3次方成正比或反比，但简化成这样就可以达到要求了。<br>在x-y坐标轴体系下，距离L需要x平方加y平方再开方，为了进一步提高效率，把这个开方去掉，就成了这样一个公式：F=(R<em>R)/(L</em>L),假设两个球的坐标为(x1,y1),(x2,y2)，那么公式就成了：
+        
+          <p class="article-more-link">
+            <a href="/2015/06/19/metaball的cocos2d-x实现：shader实现元球/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/06/19/metaball的cocos2d-x实现：shader实现元球/" data-id="cind7323s000agv95nlnb6d2b" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-lua的UTF-8中文字符的类substring截取" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/" class="article-date">
+  <time datetime="2015-06-05T16:00:00.000Z" itemprop="datePublished">2015-06-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/06/lua的UTF-8中文字符的类substring截取/">lua的UTF-8中文字符的类substring截取</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大家知道utf8的每个字符并不是定长，所以在处理中文字符截取是会出现很多麻烦，直接substring的话最后一个字符一般都会是乱码，而且长度也不对，lua没有截取UTF8中文字符的相关函数，我们只能自己写一个：</p>
+<p>取前200个中文字符  </p>
+<pre><code>for uchar in string.gfind(string.sub(data.response.docs[i].content,sp), ‘[%z\1-\127\194-\244][\128-\191]*’) do
+     tab[#tab+1] = uchar 
+end
+for j=1,200,1 do
+    if tab[j]~=nil then
+        endp=endp..tab[j]
+    end
+end
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/06/06/lua的UTF-8中文字符的类substring截取/" data-id="cind7323g0006gv95gvtwze9x" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-void *遇到vtable时引起的错误" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/03/22/void *遇到vtable时引起的错误/" class="article-date">
+  <time datetime="2015-03-21T16:00:00.000Z" itemprop="datePublished">2015-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/22/void *遇到vtable时引起的错误/">void *遇到vtable时引起的错误</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有一个虚基类，名字叫BattleBase，下面继承了很多BattleA，BattleB，BattleC……，由于某种需求，需要把当前的BattleA，BattleB，BattleC等实例指针传递给PluginHelper单例来实现C++与Objective-C的交互，做法是把当前this指针直接赋值给PluginHelper里的个void *变量，使用时在转换为BattleBase*，来规避cocos2d-x与iOS类型重名的问题，出错，发现是vtable造成的问题，这个void *导致无法把子类指针赋值到基类，由于vtable的存在以及BattleA同时继承CCLayer与BattleBase，void *拿到的指针只能是BattleA的指针，而想通过BattleBase来获取BattleA的指针的话，则应该是BattleA的指针加一个单位内存长度。<br>不能用void*，还要保证头文件不互相污染，需要再设计一个BattleInterface，BattleBase继承它，BattleInterface只定义纯接口不干任何事情，那么BattleInterface *就可以出现在PluginHelper.h里了。<br>
+        
+          <p class="article-more-link">
+            <a href="/2015/03/22/void *遇到vtable时引起的错误/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/03/22/void *遇到vtable时引起的错误/" data-id="cind7323u000bgv95ujsicj0f" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iOS平台下cocos2d-x的一些记录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/03/20/iOS平台下cocos2d-x的一些记录/" class="article-date">
+  <time datetime="2015-03-19T16:00:00.000Z" itemprop="datePublished">2015-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/20/iOS平台下cocos2d-x的一些记录/">iOS平台下cocos2d-x的一些记录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>64位的问题. 之前的版本比如3.0 ， 引擎本身编译可以设置64位 ， 但是引擎使用的几个第三方库（libfreetype,libjpeg,libpng,libtiff,libwebp等） ， 并没有在编译选项里配置64位的编译 ， 可以自己重新编译arm64位版本的 ，也可以从新的cocos2d-x里把libfreetype_arm64.a,libjpeg_arm64.a,libpng_arm64.a,libtiff_arm64.a,libwebp_arm64.a几个静态库文件添加到工程里。</p>
+</li>
+<li><p>移植vungle、unityads时 ， 只链接静态库运行时会抛出断言，一般原因都是资源找不到了 ，手动添加即可。</p>
+</li>
+<li><p>unityads的api是Objective-C的 ， 需借助之前<a href="2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/">OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互</a>这篇文章里提及的方法来给cocos2d-x的C++代码使用 ，添加   </p>
+<pre><code>@interface AppController :NSObject&lt;UIApplicationDelegate,UnityAdsDelegate&gt;
+</code></pre><p>  实现    </p>
+<pre><code>-(void)unityAdsVideoCompleted:(NSString *)rewardItemKey skipped:(BOOL)skipped
+</code></pre></li>
+</ol>
+        
+          <p class="article-more-link">
+            <a href="/2015/03/20/iOS平台下cocos2d-x的一些记录/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/03/20/iOS平台下cocos2d-x的一些记录/" data-id="cind7323f0005gv95znna2gy0" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux常用库的lua移植：libmcrypt的lua插件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/" class="article-date">
+  <time datetime="2014-12-24T16:00:00.000Z" itemprop="datePublished">2014-12-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/">linux常用库的lua移植：libmcrypt的lua插件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>openresty的lua方案效率不错，缺点是库不全，php现成的接口应用改成lua并不容易，比如libmcrypt，这个php常用的加密库（其实nginx的lua模块加密还有个不错的原生方案，openssl，在openresty\lualib\resty目录下，特定的加密方式需要自行修改），第三方C库在lua里使用都可以依照本文的方法来处理。<br>        下载libmcrypt的源代码，解压，找到正常libmcrypt库的入口C文件（源代码目录下，找int main()），这个目录libmcrypt-2.5.3\src里面，找到这几个文件：cipher_test.c和aes_test.c，移植就从修改这两个文件的开始：<br>
+        
+          <p class="article-more-link">
+            <a href="/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/" data-id="cind7323d0004gv95chby23wk" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/" class="article-date">
+  <time datetime="2014-12-22T16:00:00.000Z" itemprop="datePublished">2014-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/">OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>虽然objc允许后缀为mm的文件混合编写C++和OC代码，但是不可在游戏代码里引入ios系统的头文件，最新版本的 cocos2d-x 3.0，几个重要的类型和cocoa类型重复（Point，Color……）。所以需要将二者的头文件完全分离。<br>构建一PluginHelper单例类，后缀为mm，mm文件可以混编OC与C++代码，同时考虑到PluginHelper.h这个文件会被OC代码和游戏代码同时引用，所以PluginHelper.h不能出现任何IOS系统和引擎的头文件。像这样：  </li>
+</ol>
+<pre><code>//ADBannerView *adView;  
+//RootViewController *viewController;  
+unsigned char  * _data=NULL,pixels=NULL;  
+void *adView;  
+void *viewController;  
+void *delegate;  
+static PluginHelper* getInstance();  
+static int getScore();  
+static void updateScore(int score);  
+static void shareTweet(int score);  
+static bool isGameCenterAvailable();  
+static void authenticateLocalUser();  
+static void reportScore(int score);  
+static void showLeaderboard();  
+static void checkMemory();  
+static void rateUs();  
+</code></pre><p>所有系统或引擎独有的类型   </p>
+<pre><code>（ADBannerView *，RootViewController *）  
+</code></pre><p>
+        
+          <p class="article-more-link">
+            <a href="/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/" data-id="cind7323c0003gv951v8xjgfx" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-WIN7-Ubuntu双系统删除Ubuntu流程记录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/" class="article-date">
+  <time datetime="2014-11-02T16:00:00.000Z" itemprop="datePublished">2014-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/">WIN7-Ubuntu双系统删除Ubuntu流程记录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前是Ubuntu12.04和Windows7双系统，安装时为了性能并没有选择wubi安装方式，重新分了ext系列分区，导致windows的启动依赖于linux的grub，现需要干掉ubuntu，节省出磁盘空间。干掉ubuntu最重要的就是能正确引导windows：  </p>
+<ol>
+<li><p>进入win7，下载个软件MbrFix，放在C:\windows\system32文件夹中</p>
+</li>
+<li><p>点击开始》所有程序》附件》命令提示符</p>
+</li>
+<li><p>在命令提示符中输入  </p>
+<pre><code>MbrFix /drive 0 fixmbr /yes
+</code></pre></li>
+</ol>
+<p>
+        
+          <p class="article-more-link">
+            <a href="/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/" data-id="cind732340001gv95ashkrcxh" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-wordpress禁止某分类在首页显示的处理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/13/wordpress禁止某分类在首页显示的处理/" class="article-date">
+  <time datetime="2014-10-12T16:00:00.000Z" itemprop="datePublished">2014-10-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/13/wordpress禁止某分类在首页显示的处理/">wordpress禁止某分类在首页显示的处理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>添加了新的分区，不想让让这个区的新文章显示在首页。<br>在首页模板里找到  </p>
+<pre><code>&lt;?php while ( have_posts() ) : the_post(); ?&gt;
+</code></pre><p>一个while循环，加载文章列表的，在这个循环体第一句前面加上：  </p>
+<pre><code>&lt;?php if (is_home() &amp;&amp; in_category(‘catID’) ) continue; ?&gt;
+</code></pre><p>catID代表分类id，把这个数字放上，跳出这一遍循环  </p>
+<pre><code>&lt;?php get_template_part( ‘content’, get_post_format() ); ?&gt;
+&lt;?php endwhile; ?&gt;
+</code></pre><p>正常加载被允许分类的文章摘要，结束循环。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/22/hello-world/" data-id="cim3mlfx40003gf95it6xblvb" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2014/10/13/wordpress禁止某分类在首页显示的处理/" data-id="cind7323q0009gv95jifrcchm" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -182,6 +532,10 @@
 
   
 
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">
@@ -198,7 +552,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
     </div>
   </div>
 
@@ -211,15 +565,23 @@
       <ul>
         
           <li>
-            <a href="/2016/03/23/test2/">test2</a>
+            <a href="/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/">ngx.location.capture造成的at least one subrequest should be specified错误</a>
           </li>
         
           <li>
-            <a href="/2016/03/23/test/">test</a>
+            <a href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/">百度ping服务不兼容正常XmlRPC参数的解决方案</a>
           </li>
         
           <li>
-            <a href="/2016/03/22/hello-world/">Hello World</a>
+            <a href="/2015/06/19/metaball的cocos2d-x实现：shader实现元球/">metaball的cocos2d-x实现：shader实现元球</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/">lua的UTF-8中文字符的类substring截取</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/22/void *遇到vtable时引起的错误/">void *遇到vtable时引起的错误</a>
           </li>
         
       </ul>

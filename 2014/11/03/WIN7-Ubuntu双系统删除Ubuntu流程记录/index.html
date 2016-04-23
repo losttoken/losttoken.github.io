@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>WIN7-Ubuntu双系统删除Ubuntu流程记录 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前是Ubuntu12.04和Windows7双系统，安装时为了性能并没有选择wubi安装方式，重新分了ext系列分区，导致windows的启动依赖于linux的grub，现需要干掉ubuntu，节省出磁盘空间。干掉ubuntu最重要的就是能正确引导windows：  
+
+进入win7，下载个软件MbrFix，放在C:\windows\system32文件夹中
+
+点击开始》所有程序》附件》命令提示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WIN7-Ubuntu双系统删除Ubuntu流程记录">
+<meta property="og:url" content="http://yoursite.com/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="之前是Ubuntu12.04和Windows7双系统，安装时为了性能并没有选择wubi安装方式，重新分了ext系列分区，导致windows的启动依赖于linux的grub，现需要干掉ubuntu，节省出磁盘空间。干掉ubuntu最重要的就是能正确引导windows：  
+
+进入win7，下载个软件MbrFix，放在C:\windows\system32文件夹中
+
+点击开始》所有程序》附件》命令提示">
+<meta property="og:image" content="http://codezhai-static.qiniudn.com/wp-content/uploads/2014/08/QQ图片20140811035432.jpg">
+<meta property="og:image" content="http://codezhai-static.qiniudn.com/wp-content/uploads/2014/08/disk.png">
+<meta property="og:updated_time" content="2016-04-23T14:05:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WIN7-Ubuntu双系统删除Ubuntu流程记录">
+<meta name="twitter:description" content="之前是Ubuntu12.04和Windows7双系统，安装时为了性能并没有选择wubi安装方式，重新分了ext系列分区，导致windows的启动依赖于linux的grub，现需要干掉ubuntu，节省出磁盘空间。干掉ubuntu最重要的就是能正确引导windows：  
+
+进入win7，下载个软件MbrFix，放在C:\windows\system32文件夹中
+
+点击开始》所有程序》附件》命令提示">
+<meta name="twitter:image" content="http://codezhai-static.qiniudn.com/wp-content/uploads/2014/08/QQ图片20140811035432.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-WIN7-Ubuntu双系统删除Ubuntu流程记录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/" class="article-date">
+  <time datetime="2014-11-02T16:00:00.000Z" itemprop="datePublished">2014-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      WIN7-Ubuntu双系统删除Ubuntu流程记录
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前是Ubuntu12.04和Windows7双系统，安装时为了性能并没有选择wubi安装方式，重新分了ext系列分区，导致windows的启动依赖于linux的grub，现需要干掉ubuntu，节省出磁盘空间。干掉ubuntu最重要的就是能正确引导windows：  </p>
+<ol>
+<li><p>进入win7，下载个软件MbrFix，放在C:\windows\system32文件夹中</p>
+</li>
+<li><p>点击开始》所有程序》附件》命令提示符</p>
+</li>
+<li><p>在命令提示符中输入  </p>
+<pre><code>MbrFix /drive 0 fixmbr /yes
+</code></pre></li>
+</ol>
+<p><a id="more"></a>4. 此时已经修复了MBR，重启电脑后会发现已经没有了linux启动选项，直接进入windows了</p>
+<ol>
+<li><p>在 Win7下，在计算机(Computer)上点右键-&gt;管理(Manage)-&gt;磁盘管理(DiskManagement)：有2个没有卷标名称(卷标名称就是驱动器号，如C:,D:,E:,…)的主分区(PrimaryPartition)就是Ubuntu的分区，删除卷，包括swap之类的全部干掉，空闲磁盘就合并成一个</p>
+</li>
+<li><p>这时候新建卷有可能会提示“磁盘上没有足够的空间完成操作”，是因为不是动态磁盘不能执行分卷之类的磁盘操作，这时，需要使用“Windows+R”调出运行对话框。输入“Diskpart”，调出命令行，输入“list disk” ，找出没分配的那个disk，比如是0，输入Select Disk 0，选择该disk后输入convert dynamic，将磁盘转换成动态磁盘</p>
+</li>
+<li><p>这是重新回到磁盘管理，刚才那个空闲的绿色色块代表的分区变成了棕黄色和黑色，这是执行新加卷、格式化之类的就不会有任何阻碍了<br><img src="http://codezhai-static.qiniudn.com/wp-content/uploads/2014/08/QQ图片20140811035432.jpg" alt="disk1"></p><p>新分区后可以了，干掉了Ubuntu，拿出了90G的磁盘空间<br><img src="http://codezhai-static.qiniudn.com/wp-content/uploads/2014/08/disk.png" alt="disk2"><br>补充：</p>
+</li>
+</ol>
+<p>以上的方法重启后无法引导系统，感觉应该是那步动态磁盘的转换导致的，磁盘转换成了动态磁盘，同时，之前的MBR引导信息找不到新的动态磁盘了，下载PE系统到U盘，进入PE系统修复下MBR引导就可以了。</p>
+<p>重新进入系统后，多了个  earlier version of windows ，在命令行，执行：  </p>
+<pre><code>bcdedit /delete {ntldr} /f
+</code></pre><p>上面那个教程正确的做法应该是用动态磁盘分好区后再执行一遍  </p>
+<pre><code>MbrFix /drive 0 fixmbr /yes
+</code></pre><p>，就不会出现后面的故障了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/" data-id="cind732340001gv95ashkrcxh" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/10/13/wordpress禁止某分类在首页显示的处理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">wordpress禁止某分类在首页显示的处理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/">ngx.location.capture造成的at least one subrequest should be specified错误</a>
+          </li>
+        
+          <li>
+            <a href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/">百度ping服务不兼容正常XmlRPC参数的解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/19/metaball的cocos2d-x实现：shader实现元球/">metaball的cocos2d-x实现：shader实现元球</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/">lua的UTF-8中文字符的类substring截取</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/22/void *遇到vtable时引起的错误/">void *遇到vtable时引起的错误</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

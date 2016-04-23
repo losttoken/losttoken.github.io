@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux常用库的lua移植：libmcrypt的lua插件 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="openresty的lua方案效率不错，缺点是库不全，php现成的接口应用改成lua并不容易，比如libmcrypt，这个php常用的加密库（其实nginx的lua模块加密还有个不错的原生方案，openssl，在openresty\lualib\resty目录下，特定的加密方式需要自行修改），第三方C库在lua里使用都可以依照本文的方法来处理。        下载libmcrypt的源代码，解压，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux常用库的lua移植：libmcrypt的lua插件">
+<meta property="og:url" content="http://yoursite.com/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="openresty的lua方案效率不错，缺点是库不全，php现成的接口应用改成lua并不容易，比如libmcrypt，这个php常用的加密库（其实nginx的lua模块加密还有个不错的原生方案，openssl，在openresty\lualib\resty目录下，特定的加密方式需要自行修改），第三方C库在lua里使用都可以依照本文的方法来处理。        下载libmcrypt的源代码，解压，">
+<meta property="og:updated_time" content="2016-04-23T14:05:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux常用库的lua移植：libmcrypt的lua插件">
+<meta name="twitter:description" content="openresty的lua方案效率不错，缺点是库不全，php现成的接口应用改成lua并不容易，比如libmcrypt，这个php常用的加密库（其实nginx的lua模块加密还有个不错的原生方案，openssl，在openresty\lualib\resty目录下，特定的加密方式需要自行修改），第三方C库在lua里使用都可以依照本文的方法来处理。        下载libmcrypt的源代码，解压，">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-linux常用库的lua移植：libmcrypt的lua插件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/" class="article-date">
+  <time datetime="2014-12-24T16:00:00.000Z" itemprop="datePublished">2014-12-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux常用库的lua移植：libmcrypt的lua插件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>openresty的lua方案效率不错，缺点是库不全，php现成的接口应用改成lua并不容易，比如libmcrypt，这个php常用的加密库（其实nginx的lua模块加密还有个不错的原生方案，openssl，在openresty\lualib\resty目录下，特定的加密方式需要自行修改），第三方C库在lua里使用都可以依照本文的方法来处理。<br>        下载libmcrypt的源代码，解压，找到正常libmcrypt库的入口C文件（源代码目录下，找int main()），这个目录libmcrypt-2.5.3\src里面，找到这几个文件：cipher_test.c和aes_test.c，移植就从修改这两个文件的开始：<br>        <a id="more"></a> </p>
+<pre><code>int main()  
+{  
+MCRYPT td;//设定IV向量（需要的话）  
+unsigned char IV[8]={0x12,0x34,0x56,0x78,0x90,0xab,0xcd,0xef};  
+unsigned char key[8]={0x12,0x34,0x56,0x78,0x90,0xab,0xcd,0xef};  
+int keysize;  
+names = mcrypt_list_algorithms (ALGORITHMS_DIR, &amp;jmax);  
+modes = mcrypt_list_modes (MODES_DIR, &amp;imax);//设定加密模式  
+for (i=0;i&lt;imax;i++) {  
+if(strcmp(modes[i],”cbc”)==0){  
+td = mcrypt_module_open(names[j], ALGORITHMS_DIR, modes[i], MODES_DIR);//初始化  
+ivsize = mcrypt_enc_get_iv_size(td);  
+mcrypt_generic_init( td, key, keysize, IV) ;  
+if (mcrypt_enc_is_block_mode(td)!=0)  
+siz = (strlen(TEXT) / mcrypt_enc_get_block_size(td))*mcrypt_enc_get_block_size(td);  
+else siz = strlen(TEXT);//开辟存储结果的内存  
+text = calloc( 1, siz);  
+memmove( text, TEXT, siz);  
+//产生结果  
+mdecrypt_generic( td, text, siz);  
+memcmp( text, TEXT, siz);  
+mcrypt_generic_deinit(td);  
+mcrypt_module_close(td);  
+free(text);  
+free(key);  
+free(IV);  
+return;  
+}    
+</code></pre><p>保存，编译，gcc编译选项记得加lpthread之类的，运行 . 到这步，移植的逻辑被证明是正确的，接下来想办法把它做成一个弓lua调用的so文件。</p>
+<pre><code>#include “../lib/mcrypt.h”   //使用libmcrypt要加的头文件
+#include “lua.h”
+#include “lauxlib.h”
+#include “lualib.h”          //lua和C、C++交互需要的几个头文件
+unsigned char *enc(unsigned char *data);
+unsigned char *dec(unsigned char *data);   //这几个封装上面加密和解密的逻辑，一个加密，一个解密
+
+接下来想办法把这两个函数抛给lua：
+
+static int encode(lua_State* L)
+{
+const char *src=lua_tostring(L,-1);
+unsigned char *s=(unsigned char *)malloc(lua_strlen(L,-1)+1);
+strcpy(s,src);
+s[lua_strlen(L,-1)]=(unsigned char)0x0;
+unsigned char *rst=enc(s);   //在这里调用enc()加密函数
+lua_pushstring(L,rst);
+free(s);
+free(rst);
+return 1;
+}
+
+static int decode(lua_State* L)
+{
+const char *src=lua_tostring(L,-1);
+unsigned char*s=(unsigned char *)malloc(lua_strlen(L,-1)+1);
+strcpy(s,src);
+s[lua_strlen(L,-1)]=(unsigned char)0x0;
+unsigned char *rst=dec(s);      //在这里调用dec()解密函数
+lua_pushstring(L,rst);
+free(s);
+free(rst);
+return 1;
+}
+
+//让so文件注册这两个函数
+static luaL_Reg mylibs[] = {
+{“encode”, encode},
+{“decode”, decode},
+{NULL, NULL}
+};
+
+//我们库的名字叫做libdes4lua.so,最终这么写，相当于动态链接库的main
+int luaopen_des4lua(lua_State* L)
+{
+const char* libName = “des4lua”;
+luaL_register(L,libName,mylibs);  //注册，透给lua脚本
+return 1;
+}
+</code></pre><p>编译，得到libdes4lua.so,将这个文件拷贝到openresty/lualib,openresty的lua加密库就做好了.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/" data-id="cind7323d0004gv95chby23wk" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/20/iOS平台下cocos2d-x的一些记录/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          iOS平台下cocos2d-x的一些记录
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/">ngx.location.capture造成的at least one subrequest should be specified错误</a>
+          </li>
+        
+          <li>
+            <a href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/">百度ping服务不兼容正常XmlRPC参数的解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/19/metaball的cocos2d-x实现：shader实现元球/">metaball的cocos2d-x实现：shader实现元球</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/">lua的UTF-8中文字符的类substring截取</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/22/void *遇到vtable时引起的错误/">void *遇到vtable时引起的错误</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

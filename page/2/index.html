@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-cocos2d-x的头发仿真" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/27/cocos2d-x的头发仿真/" class="article-date">
+  <time datetime="2014-09-26T16:00:00.000Z" itemprop="datePublished">2014-09-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/27/cocos2d-x的头发仿真/">cocos2d-x的头发仿真</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由于是2D实现飞翔时头发飘逸的效果，问题得到了一定简化 , 头发与头发之间，头发与外物之间的关系均可以忽略，仅仅需要考虑风向和发根点的影响即可。</p>
+<p>那么，头发就可以看成是一个个的点连起来的线 ， 后面的点的运动依赖于前一个点的运动, 每一个点都只和自己前面那个点有关系。笔者之前的那篇<a href="">metaball的cocos2d-x实现：shader实现元球</a>文章里 ， 有用到万有引力，为了简化问题只使用了万有引力定律里的正比反比关系，在这个头发的模拟中，也一样需要做简化处理：<br>
+        
+          <p class="article-more-link">
+            <a href="/2014/09/27/cocos2d-x的头发仿真/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/09/27/cocos2d-x的头发仿真/" data-id="cind732390002gv958e83j4k4" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-全站静态资源抓取的ngx_lua方案" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/07/03/全站静态资源抓取的ngx_lua方案/" class="article-date">
+  <time datetime="2014-07-02T16:00:00.000Z" itemprop="datePublished">2014-07-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/07/03/全站静态资源抓取的ngx_lua方案/">全站静态资源抓取的ngx_lua方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一些方案，没有一一测试：SiteSucker、httrack、idm、nomder、webzip、Teleport Pro、wget</p>
+<p>webzip有乱码问题，？和后面一个英文字符被合成了一个中文乱码，原因不明，最终采用的是wget的方案：  </p>
+<pre><code>wget -e robots=off -w 1 -x -np -p -m -k -t 1 -X/upload/ http://domain
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2014/07/03/全站静态资源抓取的ngx_lua方案/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/07/03/全站静态资源抓取的ngx_lua方案/" data-id="cind7323x000dgv9566f9db0n" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-一个第三方认证服务的备份" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/07/02/一个第三方认证服务的备份/" class="article-date">
+  <time datetime="2014-07-01T16:00:00.000Z" itemprop="datePublished">2014-07-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/07/02/一个第三方认证服务的备份/">一个第三方认证服务的备份</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>chat.lua:  </p>
+<pre><code>local cjson=require ‘cjson’
+local acc=ngx.req.get_uri_args()[‘acc’]
+local cmd=ngx.req.get_uri_args()[‘cmd’]
+local res=ngx.location.capture(‘/gotyeapi/’..cmd{method=ngx.HTTP_POST,body=&apos;{“email”:”111111@11111p.cn”,”devpwd”:”11111111″,”appkey”:”1111111-111-1111-1111-11111111″,”users”:[{“account”:”‘..acc..&apos;”}]}’})
+ngx.say(‘res print:’..res.body)
+
+checkUser.lua:
+local cjson=require ‘cjson’
+local acc=ngx.req.get_uri_args()[‘account’]
+local token=ngx.req.get_uri_args()[“password”]
+local appkey=ngx.req.get_uri_args()[‘appkey’]
+–local server_id=
+
+local check_result=ngx.location.capture(‘/token_access/CheckUser?account=’..acc..’&amp;password=’..token)
+local status,rst=check_result.status,cjson.decode(check_result.body)
+rst[“appkey”]=appkey
+rst[“account”]=acc
+if status ~=200 then
+    rst[“status”]=”error”
+end
+ngx.say(cjson.encode(rst))
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2014/07/02/一个第三方认证服务的备份/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/07/02/一个第三方认证服务的备份/" data-id="cind7323y000egv95wmds4zgq" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-一个柔体的cocos2d-x实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/06/05/一个柔体的cocos2d-x实现/" class="article-date">
+  <time datetime="2014-06-04T16:00:00.000Z" itemprop="datePublished">2014-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/06/05/一个柔体的cocos2d-x实现/">一个柔体的cocos2d-x实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考贝塞尔曲线公式：<br><img src="http://upload.wikimedia.org/math/8/f/4/8f4c915ef475b93fc0f8374f378e436f.png" alt="贝兹曲线"><br>推导出八阶贝兹曲线的公式，结合CCDrawingPrimitives.cpp中的drawQuadBezier和drawSolidCircle ，<br>注意opengl的glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) segments+1)，中GL_TRIANGLE_FAN决定了以三角扇的方式填充各个顶点，来弄成一个实心的闭合图形，GL_LINE_STRIP的话就是画线啦。</p>
+<p>粗略地实现:<br>
+        
+          <p class="article-more-link">
+            <a href="/2014/06/05/一个柔体的cocos2d-x实现/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/06/05/一个柔体的cocos2d-x实现/" data-id="cind7323w000cgv95j0jrid0h" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-lua借助upstream连接至memcache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/02/14/lua借助upstream连接至memcache/" class="article-date">
+  <time datetime="2014-02-13T16:00:00.000Z" itemprop="datePublished">2014-02-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/02/14/lua借助upstream连接至memcache/">lua借助upstream连接至memcache</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近使用openresty，试图压榨服务器性能，之前的框架是nginx+php+memc+mysql，为减少mysql的查询请求，采用memcache，几个memcache相关的接口均由php代码调用，查询较为频繁，速度很不理想, 故决定使用upstream把请求拦住，代理到后方，配置成一个RPC，这样就没有代码来直接连接memcache了，这些工作直接交给nginx，速度将会有几个数量级的提升。<br>upstream配置：  </p>
+<pre><code>upstream memc_pool{
+server 10.10.1.0:11211 weight=5;
+server 10.10.1.1:11212 weight=3;
+server 10.10.1.2:11213 weight=2;
+keepalive 1024 single;
+}  
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2014/02/14/lua借助upstream连接至memcache/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/02/14/lua借助upstream连接至memcache/" data-id="cind7323l0007gv95ryfoqwmh" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/">ngx.location.capture造成的at least one subrequest should be specified错误</a>
+          </li>
+        
+          <li>
+            <a href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/">百度ping服务不兼容正常XmlRPC参数的解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/19/metaball的cocos2d-x实现：shader实现元球/">metaball的cocos2d-x实现：shader实现元球</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/">lua的UTF-8中文字符的类substring截取</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/22/void *遇到vtable时引起的错误/">void *遇到vtable时引起的错误</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

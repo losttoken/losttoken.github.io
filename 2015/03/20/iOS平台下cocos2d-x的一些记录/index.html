@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS平台下cocos2d-x的一些记录 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="64位的问题. 之前的版本比如3.0 ， 引擎本身编译可以设置64位 ， 但是引擎使用的几个第三方库（libfreetype,libjpeg,libpng,libtiff,libwebp等） ， 并没有在编译选项里配置64位的编译 ， 可以自己重新编译arm64位版本的 ，也可以从新的cocos2d-x里把libfreetype_arm64.a,libjpeg_arm64.a,libpng_ar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS平台下cocos2d-x的一些记录">
+<meta property="og:url" content="http://yoursite.com/2015/03/20/iOS平台下cocos2d-x的一些记录/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="64位的问题. 之前的版本比如3.0 ， 引擎本身编译可以设置64位 ， 但是引擎使用的几个第三方库（libfreetype,libjpeg,libpng,libtiff,libwebp等） ， 并没有在编译选项里配置64位的编译 ， 可以自己重新编译arm64位版本的 ，也可以从新的cocos2d-x里把libfreetype_arm64.a,libjpeg_arm64.a,libpng_ar">
+<meta property="og:updated_time" content="2016-04-23T14:07:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS平台下cocos2d-x的一些记录">
+<meta name="twitter:description" content="64位的问题. 之前的版本比如3.0 ， 引擎本身编译可以设置64位 ， 但是引擎使用的几个第三方库（libfreetype,libjpeg,libpng,libtiff,libwebp等） ， 并没有在编译选项里配置64位的编译 ， 可以自己重新编译arm64位版本的 ，也可以从新的cocos2d-x里把libfreetype_arm64.a,libjpeg_arm64.a,libpng_ar">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-iOS平台下cocos2d-x的一些记录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/03/20/iOS平台下cocos2d-x的一些记录/" class="article-date">
+  <time datetime="2015-03-19T16:00:00.000Z" itemprop="datePublished">2015-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS平台下cocos2d-x的一些记录
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>64位的问题. 之前的版本比如3.0 ， 引擎本身编译可以设置64位 ， 但是引擎使用的几个第三方库（libfreetype,libjpeg,libpng,libtiff,libwebp等） ， 并没有在编译选项里配置64位的编译 ， 可以自己重新编译arm64位版本的 ，也可以从新的cocos2d-x里把libfreetype_arm64.a,libjpeg_arm64.a,libpng_arm64.a,libtiff_arm64.a,libwebp_arm64.a几个静态库文件添加到工程里。</p>
+</li>
+<li><p>移植vungle、unityads时 ， 只链接静态库运行时会抛出断言，一般原因都是资源找不到了 ，手动添加即可。</p>
+</li>
+<li><p>unityads的api是Objective-C的 ， 需借助之前<a href="2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/">OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互</a>这篇文章里提及的方法来给cocos2d-x的C++代码使用 ，添加   </p>
+<pre><code>@interface AppController :NSObject&lt;UIApplicationDelegate,UnityAdsDelegate&gt;
+</code></pre><p>  实现    </p>
+<pre><code>-(void)unityAdsVideoCompleted:(NSString *)rewardItemKey skipped:(BOOL)skipped
+</code></pre></li>
+</ol>
+<a id="more"></a>
+<ol>
+<li>为增加逆向的难度 ， 第一步是在DEBUG模式下干掉gdb ， 可在main.m文件里做手脚 （阻止GDB依附）：  </li>
+</ol>
+<pre><code> #import &lt;UIKit/UIKit.h&gt;  
+ #import &lt;dlfcn.h&gt;  
+ #import &lt;sys/types.h&gt;  
+ typedef int (*ptrace_ptr_t)(int _request, pid_t _pid, caddr_t _addr, int _data);  
+ #if !defined(PT_DENY_ATTACH)  
+ #define PT_DENY_ATTACH 31  
+ #endif  
+ // !defined(PT_DENY_ATTACH)   
+ void kill_gdb() {  
+     void* handle = dlopen(0, RTLD_GLOBAL | RTLD_NOW);  
+     ptrace_ptr_t ptrace_ptr = dlsym(handle, &quot;ptrace&quot;);  
+       ptrace_ptr(PT_DENY_ATTACH, 0, 0, 0);  
+       dlclose(handle);  
+ }    
+
+int main(int argc, char *argv[]) {  
+     #ifndef DEBUG  
+     kill_gdb();  
+     #endif  
+     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];  
+     int retVal = UIApplicationMain(argc, argv, nil, @&quot;AppController&quot;);  
+     [pool release];  
+     return retVal;  
+ }
+</code></pre><ol>
+<li><p>敏感函数静态调用 :<br>如果函数属性为 static ，那么编译时该函数符号就会被解析为local符号。<br>在发布release程序时（用Xcode打包编译二进制）默认会strip裁掉这些函数符号，无疑给逆向者加大了工作难度。（static和被裁的符号表）  </p>
+<pre><code>static void s_test(){  
+    ...  
+}  
+void AAAAA::test(int a){  
+    s_test(a);  
+}  
+</code></pre><p>改变敏感逻辑在二进制里出现的位置 ， 如果直接写入test，拖到IDA里很容易看出大致干了啥事情，static则很难扒出来。</p>
+</li>
+<li><p>通过宏混淆代码 ， 虽然编译出来是二进制 ， 但函数名称会导出到符号表 ， 直接编译过去可读性是很强的 ，可在每次打包时运行一脚本 ， 此脚本生成一个全是宏定义的头文件 ，用随机字符串让符号表的函数名全是乱码 ，类似这样:  </p>
+<pre><code>#define get_data pbhYijzdiRJaLTkQ
+</code></pre></li>
+<li><p>ssh远程需要后台执行的脚本不小心前台执行后 ， 运行时间过长又不愿终止 ， 可以Ctrl+Z，bg，disown ， 不然bg后关掉ssh终端任务一样会终止 ，disown则交出了所有权 ，真正意义上的后台执行了。</p>
+</li>
+<li><p>越狱判断 ， 方法很多 ， 最简单的方法挑选了三个 : cydia的存在 ，系统权限目录的accessibility ，动态链接库:  </p>
+<pre><code>int isJailBreak=0;  
+if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@&quot;cydia://&quot;]]){  
+isJailBreak=1;  
+}  
+if ([[NSFileManager defaultManager] fileExistsAtPath:@&quot;/User/Applications/&quot;]) {  
+isJailBreak=1;  
+}  
+if(getenv(&quot;DYLD_INSERT_LIBRARIES&quot;)){  
+isJailBreak=1;  
+}  
+</code></pre></li>
+<li><p>上报硬件id ， 备选是idfa和uuid ， 若没有广告 ， 采用uuid（不是udid，udid已废弃），缺点是用户卸载掉再次通过 Purchased 里下载也会生成新的uuid :  </p>
+<pre><code>[[NSUUID UUID] UUIDString];  
+</code></pre></li>
+<li><p>sqlite3注意sid和para的对应关系就好了：  </p>
+<pre><code>char *sid=new char[100];  
+sid[0]=&apos;\0&apos;;  
+if (sqlite3_exec(db, &quot;select sid from xxxxx_sid where id=0;&quot;,  
+[](void * para, int n_column, char ** column_value, char ** column_name)  
+{ char *sid_=*(char **)(para); strcpy(sid_,*column_value); return 0;},  
+&amp;sid, &amp;err) != SQLITE_OK) {  
+sqlite3_close(db);  
+db_status=-3;  
+}  
+</code></pre></li>
+<li><p>bitbucket只允许把公钥添加至ssh keys内  </p>
+<pre><code>ssh-keygen -t rsa -C &quot;xxxxxx@gmail.com&quot;  
+cat ~/.ssh/id_rsa.pub  
+cd /path/xxx  
+git init  
+git remote add origin git@bitbucket.org:xxxxx/xxxxx.git  
+git add *  
+git commit -m &apos;xxxxxx&apos;  
+git push -u origin master  
+</code></pre><p>移除cocos2d文件夹版本控制:  </p>
+<pre><code>git rm -r -n --cached */cocos2d/\* //-n：加上这个参数，执行命令时，是不会删除任何文件，而是展示此命令要删除的文件列表预览。  
+git rm -r --cached */cocos2d/\* //最终执行命令.  
+git commit -m&quot;移除cocos2d目录下所有文件的版本控制&quot; //提交  
+git push origin master //提交到远程服务器  
+</code></pre><p>若用git status命令查看，则cocos2d/目录下文件出现在untracked列表里， 我们不希望这个目录下的文件出现，则在项目根目录下，和.git 同级目录下，新建一个.gitignore文件，把.gitignore提交到远程服务器。  </p>
+</li>
+<li>iTunes Connect中预览图片设置除了不能包含有alpha通道外，图片大小过大也会造成不给任何提示信息的错误.  </li>
+<li>使用tolua++时，如果底层C++逻辑是回调的，这些回调透射给lua时，并不是线程安全的，慎用.</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/03/20/iOS平台下cocos2d-x的一些记录/" data-id="cind7323f0005gv95znna2gy0" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/22/void *遇到vtable时引起的错误/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          void *遇到vtable时引起的错误
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">linux常用库的lua移植：libmcrypt的lua插件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/">ngx.location.capture造成的at least one subrequest should be specified错误</a>
+          </li>
+        
+          <li>
+            <a href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/">百度ping服务不兼容正常XmlRPC参数的解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/19/metaball的cocos2d-x实现：shader实现元球/">metaball的cocos2d-x实现：shader实现元球</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/">lua的UTF-8中文字符的类substring截取</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/22/void *遇到vtable时引起的错误/">void *遇到vtable时引起的错误</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

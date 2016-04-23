@@ -3,18 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>test page | Hexo</title>
+  <title>全站静态资源抓取的ngx_lua方案 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="test page">
-<meta property="og:url" content="http://yoursite.com/test-page/index.html">
+  <meta name="description" content="一些方案，没有一一测试：SiteSucker、httrack、idm、nomder、webzip、Teleport Pro、wget
+webzip有乱码问题，？和后面一个英文字符被合成了一个中文乱码，原因不明，最终采用的是wget的方案：  
+wget -e robots=off -w 1 -x -np -p -m -k -t 1 -X/upload/ http://domain">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全站静态资源抓取的ngx_lua方案">
+<meta property="og:url" content="http://yoursite.com/2014/07/03/全站静态资源抓取的ngx_lua方案/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2016-03-22T16:04:38.000Z">
+<meta property="og:description" content="一些方案，没有一一测试：SiteSucker、httrack、idm、nomder、webzip、Teleport Pro、wget
+webzip有乱码问题，？和后面一个英文字符被合成了一个中文乱码，原因不明，最终采用的是wget的方案：  
+wget -e robots=off -w 1 -x -np -p -m -k -t 1 -X/upload/ http://domain">
+<meta property="og:updated_time" content="2016-04-23T14:05:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test page">
-<meta name="twitter:description">
+<meta name="twitter:title" content="全站静态资源抓取的ngx_lua方案">
+<meta name="twitter:description" content="一些方案，没有一一测试：SiteSucker、httrack、idm、nomder、webzip、Teleport Pro、wget
+webzip有乱码问题，？和后面一个英文字符被合成了一个中文乱码，原因不明，最终采用的是wget的方案：  
+wget -e robots=off -w 1 -x -np -p -m -k -t 1 -X/upload/ http://domain">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -63,10 +69,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-全站静态资源抓取的ngx_lua方案" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/test-page/index.html" class="article-date">
-  <time datetime="2016-03-22T16:04:38.000Z" itemprop="datePublished">2016-03-23</time>
+    <a href="/2014/07/03/全站静态资源抓取的ngx_lua方案/" class="article-date">
+  <time datetime="2014-07-02T16:00:00.000Z" itemprop="datePublished">2014-07-03</time>
 </a>
     
   </div>
@@ -77,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      test page
+      全站静态资源抓取的ngx_lua方案
     </h1>
   
 
@@ -85,17 +91,52 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>一些方案，没有一一测试：SiteSucker、httrack、idm、nomder、webzip、Teleport Pro、wget</p>
+<p>webzip有乱码问题，？和后面一个英文字符被合成了一个中文乱码，原因不明，最终采用的是wget的方案：  </p>
+<pre><code>wget -e robots=off -w 1 -x -np -p -m -k -t 1 -X/upload/ http://domain
+</code></pre><a id="more"></a>
+<p>简洁地把整站抓了下来。</p>
+<p>接着的问题是，静态资源的名字是：xxxx.asp?a=zzzz&amp;b=qqqq 这种形式的，在nginx里直接访问的话会去寻找xxxx.asp，原因是？是个url关键字(URL reserved characters)，需要采取一些措施来规避，方案是HttpLluaModule，在nginx的rewrite阶段执行：  </p>
+<pre><code>rewrite_by_lua ‘
+    if string.find(ngx.var.uri,”.asp”)~=nil then
+        if ngx.var.args~=nil then
+            ngx.req.set_uri(ngx.var.uri..”?”..ngx.var.args)
+        else
+            ngx.req.set_uri(ngx.var.uri)
+        end
+    end
+‘;
+</code></pre><p>这样就成功访问了文件名为xxxx.asp?a=zzzz&amp;b=qqqq的静态文件。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/test-page/index.html" data-id="cind7322x0000gv959qqfdz4h" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2014/07/03/全站静态资源抓取的ngx_lua方案/" data-id="cind7323x000dgv9566f9db0n" class="article-share-link">Partager</a>
       
       
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2014/09/27/cocos2d-x的头发仿真/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          cocos2d-x的头发仿真
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/07/02/一个第三方认证服务的备份/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">一个第三方认证服务的备份</div>
+    </a>
+  
+</nav>
+
   
 </article>
 

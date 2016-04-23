@@ -3,18 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>test page | Hexo</title>
+  <title>lua的UTF-8中文字符的类substring截取 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="test page">
-<meta property="og:url" content="http://yoursite.com/test-page/index.html">
+  <meta name="description" content="大家知道utf8的每个字符并不是定长，所以在处理中文字符截取是会出现很多麻烦，直接substring的话最后一个字符一般都会是乱码，而且长度也不对，lua没有截取UTF8中文字符的相关函数，我们只能自己写一个：
+取前200个中文字符  
+for uchar in string.gfind(string.sub(data.response.docs[i].content,sp), ‘[%z\1-\1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua的UTF-8中文字符的类substring截取">
+<meta property="og:url" content="http://yoursite.com/2015/06/06/lua的UTF-8中文字符的类substring截取/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2016-03-22T16:04:38.000Z">
+<meta property="og:description" content="大家知道utf8的每个字符并不是定长，所以在处理中文字符截取是会出现很多麻烦，直接substring的话最后一个字符一般都会是乱码，而且长度也不对，lua没有截取UTF8中文字符的相关函数，我们只能自己写一个：
+取前200个中文字符  
+for uchar in string.gfind(string.sub(data.response.docs[i].content,sp), ‘[%z\1-\1">
+<meta property="og:updated_time" content="2016-04-23T14:05:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test page">
-<meta name="twitter:description">
+<meta name="twitter:title" content="lua的UTF-8中文字符的类substring截取">
+<meta name="twitter:description" content="大家知道utf8的每个字符并不是定长，所以在处理中文字符截取是会出现很多麻烦，直接substring的话最后一个字符一般都会是乱码，而且长度也不对，lua没有截取UTF8中文字符的相关函数，我们只能自己写一个：
+取前200个中文字符  
+for uchar in string.gfind(string.sub(data.response.docs[i].content,sp), ‘[%z\1-\1">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -63,10 +69,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-lua的UTF-8中文字符的类substring截取" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/test-page/index.html" class="article-date">
-  <time datetime="2016-03-22T16:04:38.000Z" itemprop="datePublished">2016-03-23</time>
+    <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/" class="article-date">
+  <time datetime="2015-06-05T16:00:00.000Z" itemprop="datePublished">2015-06-06</time>
 </a>
     
   </div>
@@ -77,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      test page
+      lua的UTF-8中文字符的类substring截取
     </h1>
   
 
@@ -85,17 +91,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>大家知道utf8的每个字符并不是定长，所以在处理中文字符截取是会出现很多麻烦，直接substring的话最后一个字符一般都会是乱码，而且长度也不对，lua没有截取UTF8中文字符的相关函数，我们只能自己写一个：</p>
+<p>取前200个中文字符  </p>
+<pre><code>for uchar in string.gfind(string.sub(data.response.docs[i].content,sp), ‘[%z\1-\127\194-\244][\128-\191]*’) do
+     tab[#tab+1] = uchar 
+end
+for j=1,200,1 do
+    if tab[j]~=nil then
+        endp=endp..tab[j]
+    end
+end
+</code></pre><a id="more"></a>
+<p>通过正则来判断每个UTF8字符的结尾，这个utf8结尾标志就在[%z\1-\127\194-\244][\128-\191]*这个正则里。<br>另：在处理ngx.location.capture去请求包含proxy_pass的子请求是，需要关闭gzip</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/test-page/index.html" data-id="cind7322x0000gv959qqfdz4h" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2015/06/06/lua的UTF-8中文字符的类substring截取/" data-id="cind7323g0006gv95gvtwze9x" class="article-share-link">Partager</a>
       
       
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2015/06/19/metaball的cocos2d-x实现：shader实现元球/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          metaball的cocos2d-x实现：shader实现元球
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/22/void *遇到vtable时引起的错误/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">void *遇到vtable时引起的错误</div>
+    </a>
+  
+</nav>
+
   
 </article>
 

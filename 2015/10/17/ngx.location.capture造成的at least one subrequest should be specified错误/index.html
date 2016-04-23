@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>test page | Hexo</title>
+  <title>ngx.location.capture造成的at least one subrequest should be specified错误 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="test page">
-<meta property="og:url" content="http://yoursite.com/test-page/index.html">
+  <meta name="description" content="执行批量ngx.location.capture或者ngx.location.capture_multi时，频繁报出以下错误：  
+2014/07/24 14:32:21 [error] 31703#0: *2634646 lua entry thread aborted: runtime error: sample.lua:16: at least one subrequest should b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ngx.location.capture造成的at least one subrequest should be specified错误">
+<meta property="og:url" content="http://yoursite.com/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2016-03-22T16:04:38.000Z">
+<meta property="og:description" content="执行批量ngx.location.capture或者ngx.location.capture_multi时，频繁报出以下错误：  
+2014/07/24 14:32:21 [error] 31703#0: *2634646 lua entry thread aborted: runtime error: sample.lua:16: at least one subrequest should b">
+<meta property="og:updated_time" content="2016-04-23T14:05:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test page">
-<meta name="twitter:description">
+<meta name="twitter:title" content="ngx.location.capture造成的at least one subrequest should be specified错误">
+<meta name="twitter:description" content="执行批量ngx.location.capture或者ngx.location.capture_multi时，频繁报出以下错误：  
+2014/07/24 14:32:21 [error] 31703#0: *2634646 lua entry thread aborted: runtime error: sample.lua:16: at least one subrequest should b">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -63,10 +66,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-ngx.location.capture造成的at least one subrequest should be specified错误" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/test-page/index.html" class="article-date">
-  <time datetime="2016-03-22T16:04:38.000Z" itemprop="datePublished">2016-03-23</time>
+    <a href="/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/" class="article-date">
+  <time datetime="2015-10-16T16:00:00.000Z" itemprop="datePublished">2015-10-17</time>
 </a>
     
   </div>
@@ -77,7 +80,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      test page
+      ngx.location.capture造成的at least one subrequest should be specified错误
     </h1>
   
 
@@ -85,17 +88,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>执行批量ngx.location.capture或者ngx.location.capture_multi时，频繁报出以下错误：  </p>
+<pre><code>2014/07/24 14:32:21 [error] 31703#0: *2634646 lua entry thread aborted: runtime error: sample.lua:16: at least one subrequest should be specified
+</code></pre><p>由于最开始ngx.location.capture使用了循环，所以怀疑是lua循环的时候某个变量出的问题，多次修改后直接使用 ngx.location.capture_multi来测试，问题依然存在. 由于这次是大规模执行子请求，而且这个子请求还是个proxy_pass的子请求，问题有可能出在proxy_pass上<br>翻看文档，发现:<br><a id="more"></a><br>    Note that subrequests issued by ngx.location.capture inherit all the request headers of the current request by default and that this may have unexpected side effects on the subrequest responses. For example, when using the standard<br>    ngx_proxy<br>    module to serve subrequests, an “Accept-Encoding: gzip” header in the main request may result in gzipped responses that cannot be handled properly in Lua code. Original request headers should be ignored by setting proxy_pass_request_headers to<br>    off<br>    in subrequest locations.</p>
+<p>把proxy_pass_request_headers 设为off、gzip关闭，问题解决。只有在执行大量ngx.location.capture子请求并且子请求是proxy_pass时才会触发.</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/test-page/index.html" data-id="cind7322x0000gv959qqfdz4h" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/" data-id="cind7323n0008gv95o2setads" class="article-share-link">Partager</a>
       
       
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">百度ping服务不兼容正常XmlRPC参数的解决方案</div>
+    </a>
+  
+</nav>
+
   
 </article>
 

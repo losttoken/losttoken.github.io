@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>void *遇到vtable时引起的错误 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="有一个虚基类，名字叫BattleBase，下面继承了很多BattleA，BattleB，BattleC……，由于某种需求，需要把当前的BattleA，BattleB，BattleC等实例指针传递给PluginHelper单例来实现C++与Objective-C的交互，做法是把当前this指针直接赋值给PluginHelper里的个void *变量，使用时在转换为BattleBase*，来规避coc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="void *遇到vtable时引起的错误">
+<meta property="og:url" content="http://yoursite.com/2015/03/22/void *遇到vtable时引起的错误/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="有一个虚基类，名字叫BattleBase，下面继承了很多BattleA，BattleB，BattleC……，由于某种需求，需要把当前的BattleA，BattleB，BattleC等实例指针传递给PluginHelper单例来实现C++与Objective-C的交互，做法是把当前this指针直接赋值给PluginHelper里的个void *变量，使用时在转换为BattleBase*，来规避coc">
+<meta property="og:updated_time" content="2016-04-23T14:05:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="void *遇到vtable时引起的错误">
+<meta name="twitter:description" content="有一个虚基类，名字叫BattleBase，下面继承了很多BattleA，BattleB，BattleC……，由于某种需求，需要把当前的BattleA，BattleB，BattleC等实例指针传递给PluginHelper单例来实现C++与Objective-C的交互，做法是把当前this指针直接赋值给PluginHelper里的个void *变量，使用时在转换为BattleBase*，来规避coc">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-void *遇到vtable时引起的错误" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/03/22/void *遇到vtable时引起的错误/" class="article-date">
+  <time datetime="2015-03-21T16:00:00.000Z" itemprop="datePublished">2015-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      void *遇到vtable时引起的错误
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有一个虚基类，名字叫BattleBase，下面继承了很多BattleA，BattleB，BattleC……，由于某种需求，需要把当前的BattleA，BattleB，BattleC等实例指针传递给PluginHelper单例来实现C++与Objective-C的交互，做法是把当前this指针直接赋值给PluginHelper里的个void *变量，使用时在转换为BattleBase*，来规避cocos2d-x与iOS类型重名的问题，出错，发现是vtable造成的问题，这个void *导致无法把子类指针赋值到基类，由于vtable的存在以及BattleA同时继承CCLayer与BattleBase，void *拿到的指针只能是BattleA的指针，而想通过BattleBase来获取BattleA的指针的话，则应该是BattleA的指针加一个单位内存长度。<br>不能用void*，还要保证头文件不互相污染，需要再设计一个BattleInterface，BattleBase继承它，BattleInterface只定义纯接口不干任何事情，那么BattleInterface *就可以出现在PluginHelper.h里了。<br><a id="more"></a><br>来验证下上面的想法：<br>类B继承A,B,C三个基类  </p>
+<pre><code>#include &quot;A.h&quot;
+#include &quot;C.h&quot;
+#include &quot;D.h&quot;
+class B : public A,public C,public D{
+public:
+B();
+void fa() override;
+void fc() override;
+void fd() override;
+void fb();
+virtual ~B();
+};
+</code></pre><p>验证vtable和void *的影响：  </p>
+<pre><code>int main(int argc,char **argv){
+    B *bb=new B();
+    A *aa=bb;
+    C *cc=bb;
+    D *dd=bb;
+    void *b=(void *)bb;
+    A *a=(A *)b;
+    C *c=(C *)b;
+    D *d=(D *)b;
+    cout&lt;&lt;(int)aa&lt;&lt;std::endl;
+    cout&lt;&lt;(int)bb&lt;&lt;std::endl;
+    cout&lt;&lt;(int)cc&lt;&lt;std::endl;
+    cout&lt;&lt;(int)dd&lt;&lt;std::endl;
+
+    cout&lt;&lt;(int)a&lt;&lt;std::endl;
+    cout&lt;&lt;(int)b&lt;&lt;std::endl;
+    cout&lt;&lt;(int)c&lt;&lt;std::endl;
+    cout&lt;&lt;(int)d&lt;&lt;std::endl;
+    return 0;
+}
+</code></pre><p>查看输出结果：  </p>
+<pre><code>5736640
+5736640
+5736644
+5736648
+5736640
+5736640
+5736640
+5736640
+</code></pre><p>和预想的一样，C++的多态借助于vtable，vtable的存在导致基类获取的指针可能是子类指针+4的倍数，这里的void *不能随便使用，不能将子类指针赋值给void *然后在另一个地方用基类指针来拿void <em>指针来达到目的，void \</em>拿到的只是子类的确切地址,再转换为基类指针则搞乱了vtable的位置。<br>根据结果可以推测vtable的结构：  </p>
+<pre><code>5736640:B.fa,A.fa2,A.fa3,....,B.fb;
+5736644:B.fc,C.fc2,C.fc3,....;
+5736648:B.fd,D.fd2,D.fd3,....;
+</code></pre><p>这里不单不能用void *获取，父类转换子类也不可以，本身这个转换就不合理（原因是vtable的状态不确定），想要这种转换的话有个dynamic_cast可以解决问题。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/03/22/void *遇到vtable时引起的错误/" data-id="cind7323u000bgv95ujsicj0f" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          lua的UTF-8中文字符的类substring截取
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/20/iOS平台下cocos2d-x的一些记录/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">iOS平台下cocos2d-x的一些记录</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/">ngx.location.capture造成的at least one subrequest should be specified错误</a>
+          </li>
+        
+          <li>
+            <a href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/">百度ping服务不兼容正常XmlRPC参数的解决方案</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/19/metaball的cocos2d-x实现：shader实现元球/">metaball的cocos2d-x实现：shader实现元球</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/">lua的UTF-8中文字符的类substring截取</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/22/void *遇到vtable时引起的错误/">void *遇到vtable时引起的错误</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
