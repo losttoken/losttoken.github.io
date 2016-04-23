@@ -11,12 +11,12 @@
 <meta property="og:url" content="http://losttoken.github.io/2015/06/19/metaball的cocos2d-x实现：shader实现元球/index.html">
 <meta property="og:site_name" content="losttoken">
 <meta property="og:description" content="metaball实现一个细胞融合分裂的效果,这类球在图形学上有个名字，叫做metaball , 元球。metaball是这样一个东西，两个球离得很远时，互不影响，当离得比较近时，就会互相吸引，同时，这两个球的半径越大，吸引的程度也就越大，可以认为是忽略掉质量、密度等因素的万有引力，把万有引力公式里的距离和半径之外的参数全设成1，就是metaball了，两个一模一样的球放在那里，之间的引力关系，把引">
-<meta property="og:image" content="http://codezhai-static.qiniudn.com/wp-content/uploads/2014/05/metaball.png">
-<meta property="og:updated_time" content="2016-04-23T16:39:41.000Z">
+<meta property="og:image" content="http://codezhai-static.qiniudn.com/metaball.png">
+<meta property="og:updated_time" content="2016-04-23T17:43:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="metaball的cocos2d-x实现：shader实现元球">
 <meta name="twitter:description" content="metaball实现一个细胞融合分裂的效果,这类球在图形学上有个名字，叫做metaball , 元球。metaball是这样一个东西，两个球离得很远时，互不影响，当离得比较近时，就会互相吸引，同时，这两个球的半径越大，吸引的程度也就越大，可以认为是忽略掉质量、密度等因素的万有引力，把万有引力公式里的距离和半径之外的参数全设成1，就是metaball了，两个一模一样的球放在那里，之间的引力关系，把引">
-<meta name="twitter:image" content="http://codezhai-static.qiniudn.com/wp-content/uploads/2014/05/metaball.png">
+<meta name="twitter:image" content="http://codezhai-static.qiniudn.com/metaball.png">
   
     <link rel="alternate" href="/atom.xml" title="losttoken" type="application/atom+xml">
   
@@ -56,7 +56,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://losttoken.github.io"></form>
@@ -87,7 +87,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>metaball实现一个细胞融合分裂的效果,这类球在图形学上有个名字，叫做metaball , 元球。<br><img src="http://codezhai-static.qiniudn.com/wp-content/uploads/2014/05/metaball.png" alt="metaball"><br>metaball是这样一个东西，两个球离得很远时，互不影响，当离得比较近时，就会互相吸引，同时，这两个球的半径越大，吸引的程度也就越大，可以认为是忽略掉质量、密度等因素的万有引力，把万有引力公式里的距离和半径之外的参数全设成1，就是metaball了，两个一模一样的球放在那里，之间的引力关系，把引力等于某个值的点全部连起来，就成了一个类似于葫芦的形状，这就是metaball了。<br>所以，我们给出简化过后的metaball力场公式：f=R/L，和半径R成正比，和距离L成反比。当然这个R和L很可能是2次方或者3次方成正比或反比，但简化成这样就可以达到要求了。<br>在x-y坐标轴体系下，距离L需要x平方加y平方再开方，为了进一步提高效率，把这个开方去掉，就成了这样一个公式：F=(R*R)/(L*L),假设两个球的坐标为(x1,y1),(x2,y2)，那么公式就成了：<a id="more"></a>     </p>
+        <p>metaball实现一个细胞融合分裂的效果,这类球在图形学上有个名字，叫做metaball , 元球。<br><img src="http://codezhai-static.qiniudn.com/metaball.png" alt="metaball"><br>metaball是这样一个东西，两个球离得很远时，互不影响，当离得比较近时，就会互相吸引，同时，这两个球的半径越大，吸引的程度也就越大，可以认为是忽略掉质量、密度等因素的万有引力，把万有引力公式里的距离和半径之外的参数全设成1，就是metaball了，两个一模一样的球放在那里，之间的引力关系，把引力等于某个值的点全部连起来，就成了一个类似于葫芦的形状，这就是metaball了。<br>所以，我们给出简化过后的metaball力场公式：f=R/L，和半径R成正比，和距离L成反比。当然这个R和L很可能是2次方或者3次方成正比或反比，但简化成这样就可以达到要求了。<br>在x-y坐标轴体系下，距离L需要x平方加y平方再开方，为了进一步提高效率，把这个开方去掉，就成了这样一个公式：F=(R*R)/(L*L),假设两个球的坐标为(x1,y1),(x2,y2)，那么公式就成了：<a id="more"></a>     </p>
 <pre><code>F=（R*R）/((x-x1)*(x-x1)+(y-y1)*(y-y1))  
 </code></pre><p>，两个力场相叠加成为总的metaball力场，就是下面这个样子：  </p>
 <pre><code>F=（R*R）/((x-x1)*(x-x1)+(y-y1)*(y-y1))+（R*R）/((x-x2)*(x-x2)+(y-y2)*(y-y2))
@@ -121,7 +121,7 @@ void main(void)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2015/06/19/metaball的cocos2d-x实现：shader实现元球/" data-id="cind7323s000agv95nlnb6d2b" class="article-share-link">Delen</a>
+      <a data-url="http://losttoken.github.io/2015/06/19/metaball的cocos2d-x实现：shader实现元球/" data-id="cind7323s000agv95nlnb6d2b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -131,7 +131,7 @@ void main(void)
 <nav id="article-nav">
   
     <a href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           百度ping服务不兼容正常XmlRPC参数的解决方案
@@ -141,7 +141,7 @@ void main(void)
   
   
     <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">lua的UTF-8中文字符的类substring截取</div>
     </a>
   
@@ -164,7 +164,7 @@ void main(void)
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
     </div>
@@ -174,7 +174,7 @@ void main(void)
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
