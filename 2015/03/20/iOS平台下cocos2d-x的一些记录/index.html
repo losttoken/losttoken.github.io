@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/03/20/iOS平台下cocos2d-x的一些记录/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="64位的问题. 之前的版本比如3.0 ， 引擎本身编译可以设置64位 ， 但是引擎使用的几个第三方库（libfreetype,libjpeg,libpng,libtiff,libwebp等） ， 并没有在编译选项里配置64位的编译 ， 可以自己重新编译arm64位版本的 ，也可以从新的cocos2d-x里把libfreetype_arm64.a,libjpeg_arm64.a,libpng_ar">
-<meta property="og:updated_time" content="2016-04-23T14:07:39.000Z">
+<meta property="og:updated_time" content="2016-04-23T14:19:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS平台下cocos2d-x的一些记录">
 <meta name="twitter:description" content="64位的问题. 之前的版本比如3.0 ， 引擎本身编译可以设置64位 ， 但是引擎使用的几个第三方库（libfreetype,libjpeg,libpng,libtiff,libwebp等） ， 并没有在编译选项里配置64位的编译 ， 可以自己重新编译arm64位版本的 ，也可以从新的cocos2d-x里把libfreetype_arm64.a,libjpeg_arm64.a,libpng_ar">
@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -90,7 +90,7 @@
 </li>
 <li><p>移植vungle、unityads时 ， 只链接静态库运行时会抛出断言，一般原因都是资源找不到了 ，手动添加即可。</p>
 </li>
-<li><p>unityads的api是Objective-C的 ， 需借助之前<a href="2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/">OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互</a>这篇文章里提及的方法来给cocos2d-x的C++代码使用 ，添加   </p>
+<li><p>unityads的api是Objective-C的 ， 需借助之前<a href="http://losttoken.github.io/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/" target="_blank" rel="external">OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互</a>这篇文章里提及的方法来给cocos2d-x的C++代码使用 ，添加   </p>
 <pre><code>@interface AppController :NSObject&lt;UIApplicationDelegate,UnityAdsDelegate&gt;
 </code></pre><p>  实现    </p>
 <pre><code>-(void)unityAdsVideoCompleted:(NSString *)rewardItemKey skipped:(BOOL)skipped
@@ -188,7 +188,7 @@ git push origin master //提交到远程服务器
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/03/20/iOS平台下cocos2d-x的一些记录/" data-id="cind7323f0005gv95znna2gy0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/03/20/iOS平台下cocos2d-x的一些记录/" data-id="cind7323f0005gv95znna2gy0" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -198,7 +198,7 @@ git push origin master //提交到远程服务器
 <nav id="article-nav">
   
     <a href="/2015/03/22/void *遇到vtable时引起的错误/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
           void *遇到vtable时引起的错误
@@ -208,7 +208,7 @@ git push origin master //提交到远程服务器
   
   
     <a href="/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">linux常用库的lua移植：libmcrypt的lua插件</div>
     </a>
   
@@ -231,7 +231,7 @@ git push origin master //提交到远程服务器
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
     </div>
@@ -241,7 +241,7 @@ git push origin master //提交到远程服务器
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
