@@ -15,7 +15,7 @@ error: undefined reference to &amp;apos;cocos2d::PointArray::create(int)
 <meta property="og:description" content="cocos2d-x工程的安卓版本突然编译不过,而且和上次也没有任何代码的改动,报出  
 error: undefined reference to &amp;apos;cocos2d::PointArray::create(int) 
 之类的,有可能是上次编译的中间文件没删,同时编译环境变了 , 删除相关目录(proj.android/obj/)即可. http://discuss.cocos2d-x.">
-<meta property="og:updated_time" content="2016-05-27T13:39:39.000Z">
+<meta property="og:updated_time" content="2016-05-27T13:46:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一些琐碎的记录:cocos2d-x,git,Mou,lua,正则">
 <meta name="twitter:description" content="cocos2d-x工程的安卓版本突然编译不过,而且和上次也没有任何代码的改动,报出  
@@ -58,9 +58,9 @@ error: undefined reference to &amp;apos;cocos2d::PointArray::create(int)
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://losttoken.github.io"></form>
@@ -142,8 +142,7 @@ string.utable=function(str)
     --dump(tab,&quot;-----tab  &quot;)
     return tab
 end
-</code></pre><p>   。 </p>
-<ol>
+</code></pre><ol>
 <li><p>Mou快捷键:  </p>
 <pre><code>View  
 显示预览窗口 Toggle live preview: Shift + Cmd + I 
@@ -201,7 +200,7 @@ Post on Scriptogr.am: Control + Shift + S
 提交到 Tunblr Post on Tumblr: Control + Shift + T
 Export
 导出为HTML格式文件 Export HTML: Option + Cmd + E
-导出为PDF格式文件 Export PDF: Option + Cmd + P
+导出为PDF格式文件 Export PDF: Option + Cmd + P  
 </code></pre></li>
 <li><p>只需往主干合并某一些特性时,注意这些特性的提交不要和不需要提交的放入同一个commit,执行 </p>
 <pre><code>git cherry-pick &lt;commit id&gt;
@@ -222,7 +221,7 @@ git show commit hash
 <p> 配置 ~/.bash_profile:</p>
 <pre><code>if [ -f ~/.git-completion.bash ]; then
     . ~/.git-completion.bash
-fi
+fi  
 </code></pre></li>
 <li><p>新版cocos2d-x如果设置了多层节点,每层都有较复杂的opengl操作, 移动 缩放 逐像素渲染(片段着色器) 等操作 , 有可能会花屏 错乱 , 旧版cocos2d-x不存在该问题 , 原因是新版cocos2d-x的工程默认兼容3D同时做得不完善, 关闭一些设置后即可解决: </p>
 <pre><code>Director::getInstance()-&gt;setDepthTest(false);
@@ -236,7 +235,7 @@ fi
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2015/05/27/琐碎的记录/" data-id="cioprzqjr0000df95y2n45sw3" class="article-share-link">Partager</a>
+      <a data-url="http://losttoken.github.io/2015/05/27/琐碎的记录/" data-id="cioprzqjr0000df95y2n45sw3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -246,7 +245,7 @@ fi
 <nav id="article-nav">
   
     <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           lua的UTF-8中文字符的类substring截取
@@ -256,7 +255,7 @@ fi
   
   
     <a href="/2015/03/22/void *遇到vtable时引起的错误/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">void *遇到vtable时引起的错误</div>
     </a>
   
@@ -289,7 +288,7 @@ fi
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -326,7 +325,7 @@ fi
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Sun Peng<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
