@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://losttoken.github.io"></form>
@@ -103,7 +103,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2015/12/03/如何制作一只木扳指/" data-id="cindczz4s0000p895g92qmkta" class="article-share-link">Share</a>
+      <a data-url="http://losttoken.github.io/2015/12/03/如何制作一只木扳指/" data-id="cindczz4s0000p895g92qmkta" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -146,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/" data-id="cind7323n0008gv95o2setads" class="article-share-link">Share</a>
+      <a data-url="http://losttoken.github.io/2015/10/17/ngx.location.capture造成的at least one subrequest should be specified错误/" data-id="cind7323n0008gv95o2setads" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -188,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/" data-id="cind73241000fgv95xd0hdpr4" class="article-share-link">Share</a>
+      <a data-url="http://losttoken.github.io/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/" data-id="cind73241000fgv95xd0hdpr4" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -229,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2015/06/19/metaball的cocos2d-x实现：shader实现元球/" data-id="cind7323s000agv95nlnb6d2b" class="article-share-link">Share</a>
+      <a data-url="http://losttoken.github.io/2015/06/19/metaball的cocos2d-x实现：shader实现元球/" data-id="cind7323s000agv95nlnb6d2b" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -280,7 +280,184 @@ end
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2015/06/06/lua的UTF-8中文字符的类substring截取/" data-id="cind7323g0006gv95gvtwze9x" class="article-share-link">Share</a>
+      <a data-url="http://losttoken.github.io/2015/06/06/lua的UTF-8中文字符的类substring截取/" data-id="cind7323g0006gv95gvtwze9x" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-琐碎的记录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/27/琐碎的记录/" class="article-date">
+  <time datetime="2015-05-26T16:00:00.000Z" itemprop="datePublished">2015-05-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/27/琐碎的记录/">一些琐碎的记录:cocos2d-x,git,Mou,lua,正则</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>cocos2d-x工程的安卓版本突然编译不过,而且和上次也没有任何代码的改动,报出  </p>
+<pre><code>error: undefined reference to &apos;cocos2d::PointArray::create(int) 
+</code></pre><p>之类的,有可能是上次编译的中间文件没删,同时编译环境变了 , 删除相关目录(proj.android/obj/)即可. <a href="http://discuss.cocos2d-x.org/t/solved-cocos2d-x-3-2-error-undefined-reference-to/16677" target="_blank" rel="external">http://discuss.cocos2d-x.org/t/solved-cocos2d-x-3-2-error-undefined-reference-to/16677</a>.<br>一样的情况,升级了ndk版本: </p>
+<p> my situation is different: i builded it with ndk-r10b and failed at the beginning, i find that it is a bug of ndk-r10b, so use ndk-r9d instead, but forgetting clean up the project.  </p>
+<p> clean up, must clean up. it took me 2 days to solve it. never forget clean up. </p>
+</li>
+<li><p>lua的正则表达式不支持分组,一个处理聊天消息的正则备份: </p>
+</li>
+</ol>
+<pre><code>--string.utable(&quot;[f:smile]窗外abc的[护送]麻[f:cry]雀&quot;)  ======&gt; [&quot;[f:smile]&quot;,&quot;窗&quot;,&quot;外&quot;,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;的&quot;,&quot;[&quot;,&quot;护&quot;,&quot;送&quot;,&quot;]&quot;,&quot;麻&quot;,&quot;[f:cry]&quot;,&quot;雀&quot;]   
+
+string.utable=function(str)
+    local tab={}
+
+    --UTF8 and emoji POSIX regex pattern:(\[[f]:[^\s\[\]]+\])|([\1-\127\194-\244][\128-\191]*)
+    --for uchar in string.gfind(str, &apos;(%[[f]:[^%s%[%]]+%])|([\1-\127\194-\244][\128-\191]*)&apos;) do tab[#tab+1] = uchar end
+
+    --Lua doesn&apos;t support the standard POSIX regex,so the standard beautiful pattern above can not work.  
+    --So we can only use the dirty code below to complete the feature...
+
+    local bracketFlag=false
+    local emojiFlag=false
+
+    for uchar in string.gfind(str, &apos;[\1-\127\194-\244][\128-\191]*&apos;) do 
+        if uchar==&quot;[&quot; then
+            bracketFlag=true
+            tab[#tab+1] = uchar 
+        elseif uchar==&quot;]&quot; then
+            bracketFlag=false
+            if emojiFlag then
+                tab[#tab] = tab[#tab]..uchar 
+                emojiFlag=false
+            else
+                tab[#tab+1] = uchar 
+            end
+        elseif bracketFlag and uchar==&quot;f&quot; then
+            emojiFlag=true
+            tab[#tab] = tab[#tab]..uchar
+        else
+            if emojiFlag then
+                tab[#tab] = tab[#tab]..uchar 
+            else
+                tab[#tab+1] = uchar 
+            end
+        end
+    end
+
+    --dump(tab,&quot;-----tab  &quot;)
+    return tab
+end
+</code></pre><p>   。 </p>
+<ol>
+<li><p>Mou快捷键:  </p>
+<pre><code>View  
+显示预览窗口 Toggle live preview: Shift + Cmd + I 
+显示字数 Toggle Words Counter: Shift + Cmd + W 
+将当前窗口设置为透明窗口 Toggle Transparent: Shift + Cmd + T
+固定当前窗口 Toggle Floating: Shift + Cmd + F
+编辑窗口和预览窗口相等 Left/Right = 1/1: Cmd + 0
+编辑窗口和预览窗口的显示比例为 3:1 Left/Right = 3/1: Cmd + +
+编辑窗口和预览窗口的显示比例为 1:3 Left/Right = 1/3: Cmd + -
+文字方向 Toggle Writing orientation: Cmd + L
+全屏显示开关 Toggle fullscreen: Control + Cmd + F
+Actions
+Copy HTML: Option + Cmd + C
+重点显示选中文本 Strong: Select text, Cmd + B
+将选中文本斜体显示 Emphasize:Select text, Cmd + I
+Inline Code: Select text, Cmd + K
+加删除线 Strikethrough: Select text, Cmd + U
+插入超链接 Link: Select text, Control + Shift + L
+插入图像 Image: Select text, Control + Shift + I
+选中当前单词 Select Word: Control + Option + W
+选中当前行 Select Line: Shift + Cmd + L
+选中所有 Select All: Cmd + A
+取消选中所有 Deselect All: Cmd + D
+将选中文本 转化为大写字母 Convert to Uppercase: Select text, Control + U
+将选中文本 转化为小写字母 Convert to Lowercase: Select text, Control + Shift + U
+将选中文本所有单词的首字母转为大写Convert to Titlecase: Select text, Control + Option + U
+将选中文本插入编号 Convert to List: Select lines, Control + L
+将选中文本转换成引用块 Convert to Blockquote: Select lines, Control + Q
+将光标所在行转化为1级标题 Convert to H1: Cmd + 1
+将光标所在行转化为2级标题 Convert to H2: Cmd + 2
+将光标所在行转化为3级标题 Convert to H3: Cmd + 3
+将当前行转化为4级标题 Convert to H4: Cmd + 4
+将当前行转化为5级标题 Convert to H5: Cmd + 5
+将当前行转化为6级标题 Convert to H6: Cmd + 6
+Convert Spaces to Tabs: Control + [
+Convert Tabs to Spaces: Control + ]
+插入当前日期 Insert Current Date: Control + Shift + 1
+插入当前时间 Insert Current Time: Control + Shift + 2
+插入&lt;符号 Insert entity &lt;: Control + Shift + ,
+插入&gt;符号 Insert entity &gt;: Control + Shift + .
+插入$符号 Insert entity &amp;: Control + Shift + 7
+Insert entity Space: Control + Shift + Space
+Insert Scriptogr.am Header: Control + Shift + G
+左缩进 Shift Line Left: Select lines, Cmd + [
+右缩进 Shift Line Right: Select lines, Cmd + ]
+插入下一行 New Line: Cmd + Return
+添加注释 Comment: Cmd + /
+插入换行符 Hard Linebreak: Control + Return
+Edit
+自动完成单词 Auto complete current word: Escape
+查找 voiceFind: Cmd + F
+取消查找框 Close find bar: Esc
+Post
+Post on Scriptogr.am: Control + Shift + S
+提交到 Tunblr Post on Tumblr: Control + Shift + T
+Export
+导出为HTML格式文件 Export HTML: Option + Cmd + E
+导出为PDF格式文件 Export PDF: Option + Cmd + P
+</code></pre></li>
+<li><p>只需往主干合并某一些特性时,注意这些特性的提交不要和不需要提交的放入同一个commit,执行 </p>
+<pre><code>git cherry-pick &lt;commit id&gt;
+</code></pre><p> gitlab新建项目会自动保护master分支,需管理员账户在后台设置master的保护状态为  unprotected<br> git log 的格式定制,方便脚本处理: </p>
+<pre><code>git log --pretty=oneline 
+git log --pretty=format:&quot;%cn %cr %h  %s&quot;|grep your_name 
+</code></pre><p> 配置.gitignore的相关目录无效,原因可能是之前已经成功提交了该目录,之后再把该目录配置在.gitignore里是无效的,需执行: </p>
+<pre><code>git rm -rf folder
+</code></pre><p> 一些情况下某些commit被删除,比如 </p>
+<pre><code>git reset --hard &lt;commit id&gt; 
+</code></pre><p> 之后,这个commit id之后的那个commit在git log中消失,这时需要查看reference log</p>
+<pre><code>git reflog
+</code></pre><p> 就可以找到删除的commit<br> 分支或者提交被删除后,因为一些原因 .git/logs/ 丢失,那么git reflog将会失效 ,这时寻找悬空的对象,需执行: </p>
+<pre><code>git fsck --lost-found
+获取commit hash
+git show commit hash
+</code></pre><p> git命令的自动补全:<br> <a href="https://raw.github.com/git/git/master/contrib/completion/git-completion.bash" target="_blank" rel="external">https://raw.github.com/git/git/master/contrib/completion/git-completion.bash</a> </p>
+<p> 配置 ~/.bash_profile:</p>
+<pre><code>if [ -f ~/.git-completion.bash ]; then
+    . ~/.git-completion.bash
+fi
+</code></pre></li>
+<li><p>新版cocos2d-x如果设置了多层节点,每层都有较复杂的opengl操作, 移动 缩放 逐像素渲染(片段着色器) 等操作 , 有可能会花屏 错乱 , 旧版cocos2d-x不存在该问题 , 原因是新版cocos2d-x的工程默认兼容3D同时做得不完善, 关闭一些设置后即可解决: </p>
+<pre><code>Director::getInstance()-&gt;setDepthTest(false);
+</code></pre><p> 解决了闪屏问题但是层与层之间的关系在安卓手机上有错乱.所以使用下面的设置: </p>
+<pre><code>Director::getInstance()-&gt;setProjection(Director::Projection::_3D);
+</code></pre><p> 改为:</p>
+<pre><code>Director::getInstance()-&gt;setProjection(Director::Projection::_2D);
+</code></pre></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://losttoken.github.io/2015/05/27/琐碎的记录/" data-id="cioprzqjr0000df95y2n45sw3" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -321,7 +498,7 @@ end
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2015/03/22/void *遇到vtable时引起的错误/" data-id="cind7323u000bgv95ujsicj0f" class="article-share-link">Share</a>
+      <a data-url="http://losttoken.github.io/2015/03/22/void *遇到vtable时引起的错误/" data-id="cind7323u000bgv95ujsicj0f" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -372,7 +549,7 @@ end
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2015/03/20/iOS平台下cocos2d-x的一些记录/" data-id="cind7323f0005gv95znna2gy0" class="article-share-link">Share</a>
+      <a data-url="http://losttoken.github.io/2015/03/20/iOS平台下cocos2d-x的一些记录/" data-id="cind7323f0005gv95znna2gy0" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -413,7 +590,7 @@ end
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/" data-id="cind7323d0004gv95chby23wk" class="article-share-link">Share</a>
+      <a data-url="http://losttoken.github.io/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/" data-id="cind7323d0004gv95chby23wk" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -475,58 +652,7 @@ static void rateUs();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/" data-id="cind7323c0003gv951v8xjgfx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-WIN7-Ubuntu双系统删除Ubuntu流程记录" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/" class="article-date">
-  <time datetime="2014-11-02T16:00:00.000Z" itemprop="datePublished">2014-11-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/">WIN7-Ubuntu双系统删除Ubuntu流程记录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前是Ubuntu12.04和Windows7双系统，安装时为了性能并没有选择wubi安装方式，重新分了ext系列分区，导致windows的启动依赖于linux的grub，现需要干掉ubuntu，节省出磁盘空间。干掉ubuntu最重要的就是能正确引导windows：  </p>
-<ol>
-<li><p>进入win7，下载个软件MbrFix，放在C:\windows\system32文件夹中</p>
-</li>
-<li><p>点击开始》所有程序》附件》命令提示符</p>
-</li>
-<li><p>在命令提示符中输入  </p>
-<pre><code>MbrFix /drive 0 fixmbr /yes
-</code></pre></li>
-</ol>
-<p>
-        
-          <p class="article-more-link">
-            <a href="/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/" data-id="cind732340001gv95ashkrcxh" class="article-share-link">Share</a>
+      <a data-url="http://losttoken.github.io/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/" data-id="cind7323c0003gv951v8xjgfx" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -557,7 +683,7 @@ static void rateUs();
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
     </div>
   </div>
 
@@ -565,7 +691,7 @@ static void rateUs();
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -602,7 +728,7 @@ static void rateUs();
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Sun Peng<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
