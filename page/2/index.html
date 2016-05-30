@@ -64,6 +64,109 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-linux常用库的lua移植：libmcrypt的lua插件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/" class="article-date">
+  <time datetime="2014-12-24T16:00:00.000Z" itemprop="datePublished">2014-12-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/">linux常用库的lua移植：libmcrypt的lua插件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>openresty的lua方案效率不错，缺点是库不全，php现成的接口应用改成lua并不容易，比如libmcrypt，这个php常用的加密库（其实nginx的lua模块加密还有个不错的原生方案，openssl，在openresty\lualib\resty目录下，特定的加密方式需要自行修改），第三方C库在lua里使用都可以依照本文的方法来处理。<br>        下载libmcrypt的源代码，解压，找到正常libmcrypt库的入口C文件（源代码目录下，找int main()），这个目录libmcrypt-2.5.3\src里面，找到这几个文件：cipher_test.c和aes_test.c，移植就从修改这两个文件的开始：<br>
+        
+          <p class="article-more-link">
+            <a href="/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://losttoken.github.io/2014/12/25/linux常用库的lua移植：libmcrypt的lua插件/" data-id="cind7323d0004gv95chby23wk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/" class="article-date">
+  <time datetime="2014-12-22T16:00:00.000Z" itemprop="datePublished">2014-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/">OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>虽然objc允许后缀为mm的文件混合编写C++和OC代码，但是不可在游戏代码里引入ios系统的头文件，最新版本的 cocos2d-x 3.0，几个重要的类型和cocoa类型重复（Point，Color……）。所以需要将二者的头文件完全分离。<br>构建一PluginHelper单例类，后缀为mm，mm文件可以混编OC与C++代码，同时考虑到PluginHelper.h这个文件会被OC代码和游戏代码同时引用，所以PluginHelper.h不能出现任何IOS系统和引擎的头文件。像这样：  </li>
+</ol>
+<pre><code>//ADBannerView *adView;  
+//RootViewController *viewController;  
+unsigned char  * _data=NULL,pixels=NULL;  
+void *adView;  
+void *viewController;  
+void *delegate;  
+static PluginHelper* getInstance();  
+static int getScore();  
+static void updateScore(int score);  
+static void shareTweet(int score);  
+static bool isGameCenterAvailable();  
+static void authenticateLocalUser();  
+static void reportScore(int score);  
+static void showLeaderboard();  
+static void checkMemory();  
+static void rateUs();  
+</code></pre><p>所有系统或引擎独有的类型   </p>
+<pre><code>（ADBannerView *，RootViewController *）  
+</code></pre><p>
+        
+          <p class="article-more-link">
+            <a href="/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://losttoken.github.io/2014/12/23/OC与C++头文件冲突：iOS下Objective-C与cocos2dx交互/" data-id="cind7323c0003gv951v8xjgfx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-WIN7-Ubuntu双系统删除Ubuntu流程记录" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/" class="article-date">
@@ -418,7 +521,7 @@ keepalive 1024 single;
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li></ul>
     </div>
   </div>
 
@@ -431,6 +534,14 @@ keepalive 1024 single;
       <ul>
         
           <li>
+            <a href="/2016/05/29/US Stock Log/">US Stock Log</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/29/HK Stock Log/">HK Stock Log</a>
+          </li>
+        
+          <li>
             <a href="/2015/12/03/如何制作一只木扳指/">如何制作一只木扳指</a>
           </li>
         
@@ -440,14 +551,6 @@ keepalive 1024 single;
         
           <li>
             <a href="/2015/07/09/百度ping服务不兼容正常XmlRPC参数的解决方案/">百度ping服务不兼容正常XmlRPC参数的解决方案</a>
-          </li>
-        
-          <li>
-            <a href="/2015/06/19/metaball的cocos2d-x实现：shader实现元球/">metaball的cocos2d-x实现：shader实现元球</a>
-          </li>
-        
-          <li>
-            <a href="/2015/06/06/lua的UTF-8中文字符的类substring截取/">lua的UTF-8中文字符的类substring截取</a>
           </li>
         
       </ul>

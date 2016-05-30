@@ -3,21 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>cocos2d-x的头发仿真 | losttoken</title>
+  <title>Archives: 2016 | losttoken</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="由于是2D实现飞翔时头发飘逸的效果，问题得到了一定简化 , 头发与头发之间，头发与外物之间的关系均可以忽略，仅仅需要考虑风向和发根点的影响即可。
-那么，头发就可以看成是一个个的点连起来的线 ， 后面的点的运动依赖于前一个点的运动, 每一个点都只和自己前面那个点有关系。笔者之前的那篇metaball的cocos2d-x实现：shader实现元球文章里 ， 有用到万有引力，为了简化问题只使用了万有引力">
-<meta property="og:type" content="article">
-<meta property="og:title" content="cocos2d-x的头发仿真">
-<meta property="og:url" content="http://losttoken.github.io/2014/09/27/cocos2d-x的头发仿真/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="losttoken">
+<meta property="og:url" content="http://losttoken.github.io/archives/2016/index.html">
 <meta property="og:site_name" content="losttoken">
-<meta property="og:description" content="由于是2D实现飞翔时头发飘逸的效果，问题得到了一定简化 , 头发与头发之间，头发与外物之间的关系均可以忽略，仅仅需要考虑风向和发根点的影响即可。
-那么，头发就可以看成是一个个的点连起来的线 ， 后面的点的运动依赖于前一个点的运动, 每一个点都只和自己前面那个点有关系。笔者之前的那篇metaball的cocos2d-x实现：shader实现元球文章里 ， 有用到万有引力，为了简化问题只使用了万有引力">
-<meta property="og:updated_time" content="2016-04-23T14:19:33.000Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cocos2d-x的头发仿真">
-<meta name="twitter:description" content="由于是2D实现飞翔时头发飘逸的效果，问题得到了一定简化 , 头发与头发之间，头发与外物之间的关系均可以忽略，仅仅需要考虑风向和发根点的影响即可。
-那么，头发就可以看成是一个个的点连起来的线 ， 后面的点的运动依赖于前一个点的运动, 每一个点都只和自己前面那个点有关系。笔者之前的那篇metaball的cocos2d-x实现：shader实现元球文章里 ， 有用到万有引力，为了简化问题只使用了万有引力">
+<meta name="twitter:title" content="losttoken">
+<meta name="twitter:description">
   
     <link rel="alternate" href="/atom.xml" title="losttoken" type="application/atom+xml">
   
@@ -66,67 +62,58 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-cocos2d-x的头发仿真" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/27/cocos2d-x的头发仿真/" class="article-date">
-  <time datetime="2014-09-26T16:00:00.000Z" itemprop="datePublished">2014-09-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      cocos2d-x的头发仿真
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/05/29/US Stock Log/" class="archive-article-date">
+  <time datetime="2016-05-28T16:00:00.000Z" itemprop="datePublished">May 29</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/05/29/US Stock Log/">US Stock Log</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>由于是2D实现飞翔时头发飘逸的效果，问题得到了一定简化 , 头发与头发之间，头发与外物之间的关系均可以忽略，仅仅需要考虑风向和发根点的影响即可。</p>
-<p>那么，头发就可以看成是一个个的点连起来的线 ， 后面的点的运动依赖于前一个点的运动, 每一个点都只和自己前面那个点有关系。笔者之前的那篇<a href="http://losttoken.github.io/2015/06/19/metaball的cocos2d-x实现：shader实现元球/" target="_blank" rel="external">metaball的cocos2d-x实现：shader实现元球</a>文章里 ， 有用到万有引力，为了简化问题只使用了万有引力定律里的正比反比关系，在这个头发的模拟中，也一样需要做简化处理：<br><a id="more"></a></p>
-<ul>
-<li>前一个点做细微的运动，后一个点借助MoveTo函数，永远跟在前一个点后面某个相对位置（为增加弹性的摆动效果可以用EaseOut运动函数）。</li>
-<li>减少需要计算的点，关键点之间的关系就是前面的弹簧的关系，关键点之间画贝塞尔曲线。</li>
-</ul>
-<p>如果做马尾，就把发根坐标聚集在一起，否则，就把发根分散开。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2014/09/27/cocos2d-x的头发仿真/" data-id="cind732390002gv958e83j4k4" class="article-share-link">Share</a>
-      
-      
-    </footer>
+    </header>
   </div>
+</article>
   
     
-<nav id="article-nav">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/05/29/HK Stock Log/" class="archive-article-date">
+  <time datetime="2016-05-28T16:00:00.000Z" itemprop="datePublished">May 29</time>
+</a>
+      
   
-    <a href="/2014/10/13/wordpress禁止某分类在首页显示的处理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          wordpress禁止某分类在首页显示的处理
-        
-      </div>
-    </a>
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/05/29/HK Stock Log/">HK Stock Log</a>
+    </h1>
   
-  
-    <a href="/2014/07/03/全站静态资源抓取的ngx_lua方案/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">全站静态资源抓取的ngx_lua方案</div>
-    </a>
-  
-</nav>
 
-  
+    </header>
+  </div>
 </article>
+  
+  
+    </div></section>
+  
 
 </section>
         
