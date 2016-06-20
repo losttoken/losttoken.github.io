@@ -3,30 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>wordpress禁止某分类在首页显示的处理 | losttoken</title>
+  <title>一些琐碎的记录:iOS打包等等 | losttoken</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="添加了新的分区，不想让让这个区的新文章显示在首页。在首页模板里找到  
-&amp;lt;?php while ( have_posts() ) : the_post(); ?&amp;gt;
-一个while循环，加载文章列表的，在这个循环体第一句前面加上：  
-&amp;lt;?php if (is_home() &amp;amp;&amp;amp; in_category(‘catID’) ) continue; ?&amp;gt;
-catI">
+  <meta name="description" content="如何解决Xcode 7打包的应用与iOS 9的兼容问题 将Xcode 更新至7.0.1版本后，成功打包应用，用Xcode也验证成功，但上传时报错： 
+ERROR ITMS-90474: &amp;quot;Invalid Bundle. iPad Multitasking support requires these orientations: &amp;apos;UIInterfaceOrientationP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="wordpress禁止某分类在首页显示的处理">
-<meta property="og:url" content="http://losttoken.github.io/2014/10/13/wordpress禁止某分类在首页显示的处理/index.html">
+<meta property="og:title" content="一些琐碎的记录:iOS打包等等">
+<meta property="og:url" content="http://losttoken.github.io/2016/04/27/琐碎的记录2/index.html">
 <meta property="og:site_name" content="losttoken">
-<meta property="og:description" content="添加了新的分区，不想让让这个区的新文章显示在首页。在首页模板里找到  
-&amp;lt;?php while ( have_posts() ) : the_post(); ?&amp;gt;
-一个while循环，加载文章列表的，在这个循环体第一句前面加上：  
-&amp;lt;?php if (is_home() &amp;amp;&amp;amp; in_category(‘catID’) ) continue; ?&amp;gt;
-catI">
-<meta property="og:updated_time" content="2016-04-23T14:05:21.000Z">
+<meta property="og:description" content="如何解决Xcode 7打包的应用与iOS 9的兼容问题 将Xcode 更新至7.0.1版本后，成功打包应用，用Xcode也验证成功，但上传时报错： 
+ERROR ITMS-90474: &amp;quot;Invalid Bundle. iPad Multitasking support requires these orientations: &amp;apos;UIInterfaceOrientationP">
+<meta property="og:updated_time" content="2016-06-20T14:05:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="wordpress禁止某分类在首页显示的处理">
-<meta name="twitter:description" content="添加了新的分区，不想让让这个区的新文章显示在首页。在首页模板里找到  
-&amp;lt;?php while ( have_posts() ) : the_post(); ?&amp;gt;
-一个while循环，加载文章列表的，在这个循环体第一句前面加上：  
-&amp;lt;?php if (is_home() &amp;amp;&amp;amp; in_category(‘catID’) ) continue; ?&amp;gt;
-catI">
+<meta name="twitter:title" content="一些琐碎的记录:iOS打包等等">
+<meta name="twitter:description" content="如何解决Xcode 7打包的应用与iOS 9的兼容问题 将Xcode 更新至7.0.1版本后，成功打包应用，用Xcode也验证成功，但上传时报错： 
+ERROR ITMS-90474: &amp;quot;Invalid Bundle. iPad Multitasking support requires these orientations: &amp;apos;UIInterfaceOrientationP">
   
     <link rel="alternate" href="/atom.xml" title="losttoken" type="application/atom+xml">
   
@@ -75,10 +66,10 @@ catI">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-wordpress禁止某分类在首页显示的处理" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-琐碎的记录2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/10/13/wordpress禁止某分类在首页显示的处理/" class="article-date">
-  <time datetime="2014-10-12T16:00:00.000Z" itemprop="datePublished">2014-10-13</time>
+    <a href="/2016/04/27/琐碎的记录2/" class="article-date">
+  <time datetime="2016-04-26T16:00:00.000Z" itemprop="datePublished">2016-04-27</time>
 </a>
     
   </div>
@@ -89,7 +80,7 @@ catI">
         
   
     <h1 class="article-title" itemprop="name">
-      wordpress禁止某分类在首页显示的处理
+      一些琐碎的记录:iOS打包等等
     </h1>
   
 
@@ -97,19 +88,47 @@ catI">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>添加了新的分区，不想让让这个区的新文章显示在首页。<br>在首页模板里找到  </p>
-<pre><code>&lt;?php while ( have_posts() ) : the_post(); ?&gt;
-</code></pre><p>一个while循环，加载文章列表的，在这个循环体第一句前面加上：  </p>
-<pre><code>&lt;?php if (is_home() &amp;&amp; in_category(‘catID’) ) continue; ?&gt;
-</code></pre><p>catID代表分类id，把这个数字放上，跳出这一遍循环  </p>
-<pre><code>&lt;?php get_template_part( ‘content’, get_post_format() ); ?&gt;
-&lt;?php endwhile; ?&gt;
-</code></pre><p>正常加载被允许分类的文章摘要，结束循环。</p>
+        <ol>
+<li><p>如何解决Xcode 7打包的应用与iOS 9的兼容问题 将Xcode 更新至7.0.1版本后，成功打包应用，用Xcode也验证成功，但上传时报错： </p>
+<pre><code>ERROR ITMS-90474: &quot;Invalid Bundle. iPad Multitasking support requires these orientations: &apos;UIInterfaceOrientationPortrait,UIInterfaceOrientationPortraitUpsideDown,UIInterfaceOrientationLandscapeLeft,UIInterfaceOrientationLandscapeRight&apos;. Found &apos;UIInterfaceOrientationPortrait&apos; in bundle &apos;xxxx&apos;.&quot;
+
+ERROR ITMS-90475: &quot;Invalid Bundle. iPad Multitasking support requires launch story board in bundle &apos;xxxx&apos;.&quot;
+打开项目属性，选择“General”选项，勾选红框标注的“Requires full screen”
+</code></pre><a id="more"></a></li>
+<li>bitcode: </li>
+</ol>
+<ol>
+<li><p>iOS9 https问题<br>如果在Xcode 9之前使用的时http请求，那么在XCode 9上编译的App是不能联网的，会提示如下错误:<br>App Transport Security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via your app‘s Info.plist file.<br>修 改方法是要么使服务器支持https访问，要么关闭https的使用。第一种方法对于个人开发者来说代价还是比较大的，因此推荐使用后面一种方法，具体的 做法是:在工程的Info.plist文件里添加NSAppTransportSecurity字典类型的，添加一个元素：key为 NSAllowsArbitraryLoads，值为YES。  </p>
+</li>
+<li><p>iOS 9 使用URL scheme必须将其加入白名单（摘抄）<br>否则会提示类似如下错误: </p>
+</li>
+</ol>
+<pre><code>canOpenURL: failed for URL: &quot;mqqopensdkapiV2://qqapp&quot; - error: &quot;This app is not allowed to query for scheme mqqopensdkapiV2”
+</code></pre><p>修正方法是，Info.plist文件中添加一个key为LSApplicationQueriesSchemes的数组值，里面包含需要添加白名单的string类型的scheme。特酷吧在项目中使用了qq，微信等分享登录功能，需要添加的值为： </p>
+<pre><code>mqqopensdkapiV2
+mqqOpensdkSSoLogin
+mqq
+mqzoneopensdkapiV2
+mqzoneopensdkapi19
+mqzoneopensdkapi
+mqzoneopensdk
+mqzone
+weixin
+wechat 
+</code></pre><ol>
+<li><p>新版cocos2d-x如果设置了多层节点,每层都有较复杂的opengl操作, 移动 缩放 逐像素渲染(片段着色器) 等操作 , 有可能会花屏 错乱 , 旧版cocos2d-x不存在该问题 , 原因是新版cocos2d-x的工程默认兼容3D同时做得不完善, 关闭一些设置后即可解决: </p>
+<pre><code>Director::getInstance()-&gt;setDepthTest(false);
+</code></pre><p> 解决了闪屏问题但是层与层之间的关系在安卓手机上有错乱.所以使用下面的设置: </p>
+<pre><code>Director::getInstance()-&gt;setProjection(Director::Projection::_3D);
+</code></pre><p> 改为:</p>
+<pre><code>Director::getInstance()-&gt;setProjection(Director::Projection::_2D);
+</code></pre></li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://losttoken.github.io/2014/10/13/wordpress禁止某分类在首页显示的处理/" data-id="cind7323q0009gv95jifrcchm" class="article-share-link">Partager</a>
+      <a data-url="http://losttoken.github.io/2016/04/27/琐碎的记录2/" data-id="cipo407yu0000hq95sk3au2zu" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -118,19 +137,19 @@ catI">
     
 <nav id="article-nav">
   
-    <a href="/2014/11/03/WIN7-Ubuntu双系统删除Ubuntu流程记录/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/05/29/HK Stock Log/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
-          WIN7-Ubuntu双系统删除Ubuntu流程记录
+          HK Stock Log
         
       </div>
     </a>
   
   
-    <a href="/2014/09/27/cocos2d-x的头发仿真/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/12/03/如何制作一只木扳指/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">cocos2d-x的头发仿真</div>
+      <div class="article-nav-title">如何制作一只木扳指</div>
     </a>
   
 </nav>
